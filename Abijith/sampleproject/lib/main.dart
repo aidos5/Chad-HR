@@ -41,28 +41,62 @@ class MyHomePage extends StatelessWidget {
             width: (screenwidth / 25) + 4,
             child: Column(
               children: <Widget>[
-                CollapsingListTile(
-                  some: RaisedButton(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.home,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      color: Colors.blue[600]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.campaign,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      color: Colors.blue[600]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.account_circle,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      color: Colors.blue[600]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.supervised_user_circle,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      color: Colors.blue[600]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
                     onPressed: () {},
                     child: Icon(
-                      Icons.home,
+                      Icons.discount,
                       color: Colors.white,
                       size: 35.0,
                     ),
+                    color: Colors.blue[600],
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (contect, counter) {
-                      return CollapsingListTile(
-                          some: navigationItems[counter].some);
-                    },
-                    itemCount: navigationItems.length,
-                  ),
-                )
               ],
             ),
           ),
