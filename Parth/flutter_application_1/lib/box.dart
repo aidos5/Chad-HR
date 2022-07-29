@@ -3,6 +3,7 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class Boxer extends StatefulWidget {
   final String child;
@@ -21,6 +22,7 @@ class _BoxerState extends State<Boxer> {
   bool click = true;
   @override
   Widget build(BuildContext context) {
+    //SizeConfig().init(context);
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 0, 10, 00),
       child: Column(

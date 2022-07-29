@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'details.dart';
+import 'main.dart';
 
 void main() => runApp(
       MaterialApp(debugShowCheckedModeBanner: false, home: Home()),

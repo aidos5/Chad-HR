@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'main.dart';
 
 class approval extends StatefulWidget {
   final int num;
@@ -81,7 +82,15 @@ class _approvalState extends State<approval> {
                                               height: 55,
                                               width: 190,
                                               child: MaterialButton(
-                                                child: Text('Back'),
+                                                child: Text('Back',
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 35, 38, 40),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      letterSpacing: 2.0,
+                                                      fontSize: 25,
+                                                    )),
                                                 color: Color.fromARGB(
                                                     255, 162, 182, 201),
                                                 onPressed: () {
@@ -188,7 +197,15 @@ class _approvalState extends State<approval> {
                                                 },
                                                 color: Color.fromARGB(
                                                     255, 54, 156, 109),
-                                                child: Text('Approve'),
+                                                child: Text('Approve',
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 35, 38, 40),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      letterSpacing: 2.0,
+                                                      fontSize: 25,
+                                                    )),
                                               ),
                                             )
                                           ],
@@ -242,7 +259,15 @@ class _approvalState extends State<approval> {
                                                 },
                                                 color: Color.fromARGB(
                                                     255, 156, 46, 66),
-                                                child: Text('Reject'),
+                                                child: Text('Reject',
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 35, 38, 40),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      letterSpacing: 2.0,
+                                                      fontSize: 25,
+                                                    )),
                                               ),
                                             )
                                           ],
@@ -297,7 +322,15 @@ class _approvalState extends State<approval> {
                                                   },
                                                   color: Color.fromARGB(
                                                       255, 5, 112, 166),
-                                                  child: Text('Forward')),
+                                                  child: Text('Forward',
+                                                      style: TextStyle(
+                                                        color: Color.fromARGB(
+                                                            255, 35, 38, 40),
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        letterSpacing: 2.0,
+                                                        fontSize: 25,
+                                                      ))),
                                             )
                                           ],
                                         ),

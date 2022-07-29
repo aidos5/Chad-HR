@@ -12,6 +12,7 @@ class reject extends StatefulWidget {
     this.reason = reason;
     this.num = num;
   }
+
   @override
   State<reject> createState() => _rejectState();
 }
@@ -19,10 +20,15 @@ class reject extends StatefulWidget {
 class _rejectState extends State<reject> {
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
       child: Container(
-          height: 300,
+          //width: MediaQuery.of(context).size.width / 5,
+          //height: 300,
+          width: width / 2,
+          height: height / 2,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Color.fromARGB(255, 170, 206, 235),
@@ -49,8 +55,9 @@ class _rejectState extends State<reject> {
                   SizedBox(height: 18, width: 47.2),
                   //Text('o'),
 
-                  SizedBox(
-                    width: 50,
+                  Container(
+                    width: width / 25,
+                    height: height / 30,
                     child: RaisedButton(
                       onPressed: () {
                         showDialog(
@@ -60,110 +67,142 @@ class _rejectState extends State<reject> {
                                   color: Colors.green[200],
                                   child: Padding(
                                     padding: const EdgeInsets.all(25.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(0.0),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(10),
+                                        // color:
+                                        //     Color.fromARGB(255, 170, 206, 235),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: Color.fromARGB(
+                                                255, 170, 206, 235),
+                                            border: Border.all(
+                                                color: Colors.black)),
+                                        child: Column(
                                           children: [
-                                            Text(
-                                              'FROM : ',
-                                              style: TextStyle(
-                                                  fontSize: 28.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Color.fromARGB(
-                                                      255, 55, 64, 69)),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'FROM : ',
+                                                  style: TextStyle(
+                                                      fontSize: 28.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Color.fromARGB(
+                                                          255, 55, 64, 69)),
+                                                ),
+                                                Text(
+                                                  'Employee_${widget.num + 1}',
+                                                  style: TextStyle(
+                                                      fontSize: 28.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Color.fromARGB(
+                                                          255, 20, 96, 132)),
+                                                ),
+                                                SizedBox(
+                                                    height: 28, width: 750),
+                                                SizedBox(
+                                                  height: 55,
+                                                  width: 190,
+                                                  child: MaterialButton(
+                                                    child: Text('Back',
+                                                        style: TextStyle(
+                                                          color: Color.fromARGB(
+                                                              255, 35, 38, 40),
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          letterSpacing: 2.0,
+                                                          fontSize: 25,
+                                                        )),
+                                                    color: Color.fromARGB(
+                                                        255, 55, 146, 231),
+                                                    onPressed: () {
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Home();
+                                                          });
+                                                    },
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            Text(
-                                              'Employee_${widget.num + 1}',
-                                              style: TextStyle(
-                                                  fontSize: 28.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Color.fromARGB(
-                                                      255, 20, 96, 132)),
+                                            SizedBox(height: 15),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'SUBJECT : ',
+                                                  style: TextStyle(
+                                                      fontSize: 28.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Color.fromARGB(
+                                                          255, 55, 64, 69)),
+                                                ),
+                                                Text(
+                                                  '${widget.subject}',
+                                                  style: TextStyle(
+                                                      fontSize: 28.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Color.fromARGB(
+                                                          255, 20, 96, 132)),
+                                                )
+                                              ],
                                             ),
-                                            SizedBox(height: 28, width: 750),
-                                            SizedBox(
-                                              height: 55,
-                                              width: 190,
-                                              child: MaterialButton(
-                                                child: Text('Back'),
-                                                color: Color.fromARGB(
-                                                    255, 162, 182, 201),
-                                                onPressed: () {
-                                                  showDialog(
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return Home();
-                                                      });
-                                                },
-                                              ),
-                                            )
+                                            SizedBox(height: 15),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'REASON : ',
+                                                  style: TextStyle(
+                                                      fontSize: 28.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Color.fromARGB(
+                                                          255, 55, 64, 69)),
+                                                ),
+                                                Text(
+                                                  '${widget.reason}',
+                                                  style: TextStyle(
+                                                      fontSize: 28.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Color.fromARGB(
+                                                          255, 20, 96, 132)),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(height: 15),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'CONTENT : ',
+                                                  style: TextStyle(
+                                                      fontSize: 28.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Color.fromARGB(
+                                                          255, 55, 64, 69)),
+                                                ),
+                                                Text(
+                                                  '--------------',
+                                                  style: TextStyle(
+                                                      fontSize: 28.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Color.fromARGB(
+                                                          255, 20, 96, 132)),
+                                                )
+                                              ],
+                                            ),
+                                            SizedBox(height: 200),
                                           ],
                                         ),
-                                        SizedBox(height: 15),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              'SUBJECT : ',
-                                              style: TextStyle(
-                                                  fontSize: 28.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Color.fromARGB(
-                                                      255, 55, 64, 69)),
-                                            ),
-                                            Text(
-                                              '${widget.subject}',
-                                              style: TextStyle(
-                                                  fontSize: 28.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Color.fromARGB(
-                                                      255, 20, 96, 132)),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(height: 15),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              'REASON : ',
-                                              style: TextStyle(
-                                                  fontSize: 28.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Color.fromARGB(
-                                                      255, 55, 64, 69)),
-                                            ),
-                                            Text(
-                                              '${widget.reason}',
-                                              style: TextStyle(
-                                                  fontSize: 28.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Color.fromARGB(
-                                                      255, 20, 96, 132)),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(height: 15),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              'CONTENT : ',
-                                              style: TextStyle(
-                                                  fontSize: 28.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Color.fromARGB(
-                                                      255, 55, 64, 69)),
-                                            ),
-                                            Text(
-                                              '--------------',
-                                              style: TextStyle(
-                                                  fontSize: 28.0,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Color.fromARGB(
-                                                      255, 20, 96, 132)),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(height: 200),
-                                      ],
+                                      ),
                                     ),
                                   ));
                               ;
@@ -180,42 +219,64 @@ class _rejectState extends State<reject> {
                   ),
                 ]),
                 SizedBox(height: 5),
-                Row(
-                  children: [
-                    Text(
-                      'SUBJECT : ',
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255, 55, 64, 69)),
-                    ),
-                    Text(
-                      '${widget.subject}',
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255, 20, 96, 132)),
-                    )
-                  ],
+                Container(
+                  child: Row(
+                    children: [
+                      Container(
+                        width: width / 15,
+                        height: height / 30,
+                        child: Text(
+                          'SUBJECT : ',
+                          style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 55, 64, 69)),
+                        ),
+                      ),
+                      Container(
+                        width: width / 11,
+                        height: height / 30,
+                        child: Text(
+                          '${widget.subject}',
+                          style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 20, 96, 132)),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(height: 5),
-                Row(
-                  children: [
-                    Text(
-                      'REASON : ',
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255, 55, 64, 69)),
+                Container(
+                  width: width / 4,
+                  height: height / 30,
+                  child: Container(
+                    width: width / 15,
+                    height: height / 30,
+                    child: Row(
+                      children: [
+                        Text(
+                          'REASON : ',
+                          style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 55, 64, 69)),
+                        ),
+                        Container(
+                          width: width / 15,
+                          height: height / 30,
+                          child: Text(
+                            '${widget.reason}',
+                            style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w600,
+                                color: Color.fromARGB(255, 20, 96, 132)),
+                          ),
+                        )
+                      ],
                     ),
-                    Text(
-                      '${widget.reason}',
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255, 20, 96, 132)),
-                    )
-                  ],
+                  ),
                 ),
                 SizedBox(height: 5),
                 Row(
@@ -241,6 +302,5 @@ class _rejectState extends State<reject> {
             ),
           )),
     );
-    ;
   }
 }
