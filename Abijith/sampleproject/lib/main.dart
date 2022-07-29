@@ -100,6 +100,7 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 2),
           Container(
               width: screenwidth / 1.1,
               child: GridView.builder(
