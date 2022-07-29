@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CollapsingListTile extends StatefulWidget {
-  final IconData icon;
-  CollapsingListTile({required this.icon});
+  final Widget some;
+  CollapsingListTile({required this.some});
 
   @override
   State<CollapsingListTile> createState() => _CollapsingListTileState();
@@ -18,10 +18,8 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
             SizedBox(
               width: 4.0,
             ),
-            Icon(
-              widget.icon,
-              color: Colors.white,
-              size: 35.0,
+            Container(
+              child: widget,
             ),
             SizedBox(
               width: 4.0,

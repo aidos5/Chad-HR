@@ -1,20 +1,64 @@
 import 'package:flutter/material.dart';
 
 class NavigationModel {
-  IconData icon;
+  Widget some;
 
-  NavigationModel({required this.icon});
+  NavigationModel({required this.some});
 }
 
 List<NavigationModel> navigationItems = [
   NavigationModel(
-    icon: Icons.campaign,
+      some: RaisedButton(
+    onPressed: () {},
+    child: Icon(
+      Icons.campaign,
+      color: Colors.white,
+      size: 35.0,
+    ),
+  )),
+  NavigationModel(
+    some: RaisedButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.sticky_note_2,
+          color: Colors.white,
+          size: 35.0,
+        )),
   ),
   NavigationModel(
-    icon: Icons.sticky_note_2,
+    some: RaisedButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.account_circle,
+          color: Colors.white,
+          size: 35.0,
+        )),
   ),
-  NavigationModel(icon: Icons.account_circle),
-  NavigationModel(icon: Icons.supervised_user_circle),
-  NavigationModel(icon: Icons.discount),
-  NavigationModel(icon: Icons.info),
+  NavigationModel(
+    some: RaisedButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.supervisor_account_outlined,
+          color: Colors.white,
+          size: 35.0,
+        )),
+  ),
+  NavigationModel(
+    some: RaisedButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.discount,
+          color: Colors.white,
+          size: 35.0,
+        )),
+  ),
+  NavigationModel(
+    some: RaisedButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.info,
+          color: Colors.white,
+          size: 35.0,
+        )),
+  ),
 ];

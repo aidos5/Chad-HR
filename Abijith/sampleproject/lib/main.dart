@@ -41,20 +41,28 @@ class MyHomePage extends StatelessWidget {
             width: (screenwidth / 25) + 4,
             child: Column(
               children: <Widget>[
-                CollapsingListTile(icon: Icons.home),
+                CollapsingListTile(
+                  some: RaisedButton(
+                    onPressed: () {},
+                    child: Icon(
+                      Icons.home,
+                      color: Colors.white,
+                      size: 35.0,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: 20,
                 ),
-                // Expanded(
-                //   child: ListView.builder(
-                //     itemBuilder: (contect, counter) {
-                //       return CollapsingListTile(
-                //         icon: navigationItems[counter].icon,
-                //       );
-                //     },
-                //     itemCount: navigationItems.length,
-                //   ),
-                // )
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (contect, counter) {
+                      return CollapsingListTile(
+                          some: navigationItems[counter].some);
+                    },
+                    itemCount: navigationItems.length,
+                  ),
+                )
               ],
             ),
           ),
