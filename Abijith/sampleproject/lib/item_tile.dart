@@ -28,24 +28,36 @@ class ItemTile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 20),
-                ),
-                onPressed: null,
-                child: const Text(
-                  'Edit',
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: MaterialButton(
+                  color: Colors.red,
+                  onPressed: () {
+                    Navigator.defaultRouteName;
+                  },
+                  child: const Text(
+                    'Edit',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 20),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: MaterialButton(
+                  color: Colors.red,
+                  onPressed: () {
+                    Navigator.defaultRouteName;
+                  },
+                  child: const Text(
+                    'Create',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
-                onPressed: null,
-                child: const Text(
-                  'Create',
-                ),
-              )
+              ),
             ],
           ),
         ],

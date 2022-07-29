@@ -28,45 +28,41 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(title),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   backgroundColor: Colors.green,
-      //   child: const Icon(Icons.add),
-      // ),
       body: Row(
         children: [
           Container(
             color: Colors.blue[600],
-            width: 50,
+            width: (screenwidth / 25) + 4,
             child: Column(
               children: <Widget>[
                 CollapsingListTile(icon: Icons.home),
                 SizedBox(
                   height: 20,
                 ),
-                Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (contect, counter) {
-                      return CollapsingListTile(
-                        icon: navigationItems[counter].icon,
-                      );
-                    },
-                    itemCount: navigationItems.length,
-                  ),
-                )
+                // Expanded(
+                //   child: ListView.builder(
+                //     itemBuilder: (contect, counter) {
+                //       return CollapsingListTile(
+                //         icon: navigationItems[counter].icon,
+                //       );
+                //     },
+                //     itemCount: navigationItems.length,
+                //   ),
+                // )
               ],
             ),
           ),
           Container(
-              width: 1400,
+              width: screenwidth / 1.1,
               child: GridView.builder(
                 itemCount: 20,
-                itemBuilder: (context, index) => EmployeePerks(index),
+                itemBuilder: (context, index) => ItemTile(index),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 2.5,

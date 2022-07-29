@@ -10,12 +10,14 @@ class EmployeePerks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenwidth = MediaQuery.of(context).size.width;
+    var screenheight = MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         color: Colors.blue,
       ),
-      width: 75,
+      width: screenwidth / 3,
       margin: const EdgeInsets.fromLTRB(35, 20, 20, 5),
       child: Column(
         children: [
@@ -27,24 +29,23 @@ class EmployeePerks extends StatelessWidget {
             ),
           ),
           Row(
-            //mainAxisAlignment: MainAxisAlignment.end,
-
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SizedBox(height: 75),
+              SizedBox(height: screenheight / 10),
               Row(
                 children: [
-                  SizedBox(
-                    width: 525,
-                  ),
-                  MaterialButton(
-                    color: Colors.red,
-                    onPressed: () {
-                      Navigator.defaultRouteName;
-                    },
-                    child: const Text(
-                      'Redeem',
-                      style: TextStyle(
-                        color: Colors.black,
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: MaterialButton(
+                      color: Colors.red,
+                      onPressed: () {
+                        Navigator.defaultRouteName;
+                      },
+                      child: const Text(
+                        'Redeem',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ),

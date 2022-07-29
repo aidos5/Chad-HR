@@ -52,7 +52,7 @@ class _rejectState extends State<reject> {
                         fontWeight: FontWeight.w600,
                         color: Color.fromARGB(255, 20, 96, 132)),
                   ),
-                  SizedBox(height: 18, width: 47.2),
+                  SizedBox(height: 18, width: 85),
                   //Text('o'),
 
                   Container(
@@ -70,7 +70,7 @@ class _rejectState extends State<reject> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(0.0),
                                       child: Container(
-                                        padding: const EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(20),
                                         // color:
                                         //     Color.fromARGB(255, 170, 206, 235),
                                         decoration: BoxDecoration(
@@ -103,7 +103,7 @@ class _rejectState extends State<reject> {
                                                           255, 20, 96, 132)),
                                                 ),
                                                 SizedBox(
-                                                    height: 28, width: 750),
+                                                    height: 28, width: 950),
                                                 SizedBox(
                                                   height: 55,
                                                   width: 190,
