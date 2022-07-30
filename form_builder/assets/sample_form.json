@@ -1,0 +1,48 @@
+[
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "type":"Input",
+          "key":"name",
+          "placeholder":"Name",
+          "value":"",
+          "required":true
+        },
+        {
+          "type":"Phone",
+          "key":"phone",
+          "placeholder":"Phone Number",
+          "value":"",
+          "required":true
+        },
+        {
+          "type":"Email",
+          "key":"email",
+          "placeholder":"Email",
+          "value":"",
+          "required":true
+        },
+        {
+          "type":"RadioButton",
+          "key":"gender",
+          "label":"Gender",
+          "value": "Male",
+          "items": ["Male", "Female"]
+        },
+        {
+          "type":"Select",
+          "key":"address_type",
+          "label":"Address Type",
+          "value": "Permanent",
+          "items": ["Permanent", "Business", "Communication"]
+        },
+        {
+          "type": "Switch",
+          "key":"is_admin",
+          "label": "Is Admin",
+          "switchValue": false
+        }
+      ]
+    }
+  ]
