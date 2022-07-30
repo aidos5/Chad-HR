@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'employee_perks.dart';
 import 'employee_managment.dart';
 import 'employee.dart';
+import 'approval.dart';
+import 'approval_main.dart';
 
 class sidebar extends StatelessWidget {
   @override
@@ -37,7 +39,12 @@ class sidebar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => approval_m()),
+                  );
+                },
                 child: Icon(
                   Icons.account_circle,
                   color: Colors.white,
