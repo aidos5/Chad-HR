@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'employee_perks.dart';
+import 'employee_managment.dart';
+import 'employee.dart';
 
 class sidebar extends StatelessWidget {
   @override
@@ -46,7 +48,12 @@ class sidebar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => employee_m()),
+                  );
+                },
                 child: Icon(
                   Icons.supervised_user_circle,
                   color: Colors.white,

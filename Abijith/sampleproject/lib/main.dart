@@ -37,8 +37,8 @@ class MyHomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           sidebar(),
-          Text('okay'),
-          Text('okay2'),
+          Text(
+              'THE CONTENT WILL BE ADDED SOON !                                 '),
           RaisedButton.icon(
             onPressed: () {
               Navigator.push(
@@ -48,7 +48,7 @@ class MyHomePage extends StatelessWidget {
             },
             icon: Icon(Icons.person),
             color: Color.fromARGB(255, 200, 132, 189),
-            label: Text('TAP'),
+            label: Text('PROFILE'),
           ),
         ],
       ),
