@@ -4,6 +4,8 @@ import 'employee_managment.dart';
 import 'employee.dart';
 import 'form.dart';
 import 'main.dart';
+import 'approval.dart';
+import 'approval_main.dart';
 
 class sidebar extends StatelessWidget {
   @override
