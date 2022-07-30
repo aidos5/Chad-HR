@@ -33,93 +33,21 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
       ),
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            color: Colors.blue[600],
-            width: (screenwidth / 25) + 4,
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.home,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.campaign,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Forms()),
-                        );
-                      },
-                      child: Icon(
-                        Icons.assignment,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.account_circle,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.supervised_user_circle,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const EmployeePerks()),
-                      );
-                    },
-                    child: Icon(
-                      Icons.discount,
-                      color: Colors.white,
-                      size: 35.0,
-                    ),
-                    color: Colors.blue[600],
-                  ),
-                ),
-              ],
-            ),
+          sidebar(),
+          Text(
+              'THE CONTENT WILL BE ADDED SOON !                                 '),
+          RaisedButton.icon(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => pro()),
+              );
+            },
+            icon: Icon(Icons.person),
+            color: Color.fromARGB(255, 200, 132, 189),
+            label: Text('PROFILE'),
           ),
           Container(
               width: screenwidth / 1.1,
