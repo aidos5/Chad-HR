@@ -38,7 +38,7 @@ class MyHomePage extends StatelessWidget {
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          sidebar(),
+          SideBar(),
           Container(
               width: screenwidth / 1.1,
               child: GridView.builder(

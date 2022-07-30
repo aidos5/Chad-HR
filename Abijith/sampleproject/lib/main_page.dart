@@ -21,7 +21,7 @@ class MainPage extends StatelessWidget {
       ),
       body: Row(
         children: [
-          sidebar(),
+          SideBar(),
           SizedBox(height: 2),
           Container(
               width: screenwidth / 1.1,
