@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'dart:convert';
+import 'FormBuilder.dart';
+import 'package:sampleproject/model/FormDetails.dart';
 
 class FormTile extends StatelessWidget {
   final int itemNo;
+  FormDetails formDetails;
 
-  const FormTile(
-    this.itemNo,
-  );
+  final storage = FlutterSecureStorage();
+
+  List<String> formDetails_string = [];
+
+  FormTile(this.itemNo, this.formDetails);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +27,8 @@ class FormTile extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: ListTile(
-              tileColor: Colors.blue,
-              onTap: () {},
-              hoverColor: Colors.orange,
+            child: Container(
+              child: Center(child: Text(formDetails.formName ?? "Lowda")),
             ),
           ),
           Row(
@@ -33,7 +39,18 @@ class FormTile extends StatelessWidget {
                 child: MaterialButton(
                   color: Colors.red,
                   onPressed: () {
-                    Navigator.defaultRouteName;
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return StatefulBuilder(builder: (context, setState) {
+                            return Dialog(
+                              child: Scaffold(
+                              appBar: AppBar(
+                                title: Text(formDetails.formName??"No Name"),
+                              ),
+                            ));
+                          });
+                        });
                   },
                   child: const Text(
                     'Edit',

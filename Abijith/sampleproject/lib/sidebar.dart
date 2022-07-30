@@ -7,7 +7,14 @@ import 'main.dart';
 import 'approval.dart';
 import 'approval_main.dart';
 
-class sidebar extends StatelessWidget {
+class SideBar extends StatefulWidget {
+  SideBar({Key? key}) : super(key: key);
+
+  @override
+  State<SideBar> createState() => _SideBarState();
+}
+
+class _SideBarState extends State<SideBar> {
   @override
   Widget build(BuildContext context) {
     var screenwidth = MediaQuery.of(context).size.width;
@@ -49,9 +56,12 @@ class sidebar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
+                  setState(() {
+                    Navigator.push(
+                      context,
                       MaterialPageRoute(builder: (context) => Forms()),
-                      (route) => false);
+                    );
+                  });
                 },
                 child: Icon(
                   Icons.assignment,
@@ -111,3 +121,10 @@ class sidebar extends StatelessWidget {
     );
   }
 }
+
+// class sidebar extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+    
+//   }
+// }
