@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sampleproject/main_page_tile.dart';
+import 'sidebar.dart';
+import 'profile.dart';
 import 'employee_perks.dart';
 import 'form.dart';
+import 'userprofile.dart';
 
 void main() => runApp(const MyApp());
 
@@ -36,19 +39,6 @@ class MyHomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           sidebar(),
-          Text(
-              'THE CONTENT WILL BE ADDED SOON !                                 '),
-          RaisedButton.icon(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => pro()),
-              );
-            },
-            icon: Icon(Icons.person),
-            color: Color.fromARGB(255, 200, 132, 189),
-            label: Text('PROFILE'),
-          ),
           Container(
               width: screenwidth / 1.1,
               child: GridView.builder(
@@ -61,6 +51,17 @@ class MyHomePage extends StatelessWidget {
                   crossAxisSpacing: 20,
                 ),
               )),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => pro()),
+              );
+            },
+            icon: Icon(Icons.person),
+            iconSize: 40,
+            color: Color.fromARGB(255, 200, 132, 189),
+          ),
         ],
       ),
     );

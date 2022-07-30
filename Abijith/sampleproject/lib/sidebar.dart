@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'employee_perks.dart';
 import 'employee_managment.dart';
 import 'employee.dart';
+import 'form.dart';
+import 'main.dart';
 
 class sidebar extends StatelessWidget {
   @override
@@ -15,7 +17,14 @@ class sidebar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MyHomePage(
+                                title: 'Chad HR',
+                              )));
+                },
                 child: Icon(
                   Icons.home,
                   color: Colors.white,
@@ -29,6 +38,22 @@ class sidebar extends StatelessWidget {
                 onPressed: () {},
                 child: Icon(
                   Icons.campaign,
+                  color: Colors.white,
+                  size: 35.0,
+                ),
+                color: Colors.blue[600]),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Forms()),
+                  );
+                },
+                child: Icon(
+                  Icons.assignment,
                   color: Colors.white,
                   size: 35.0,
                 ),

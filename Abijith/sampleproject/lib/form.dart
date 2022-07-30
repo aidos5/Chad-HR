@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sampleproject/sidebar.dart';
 
 import 'form_tile.dart';
 
@@ -17,70 +18,7 @@ class Forms extends StatelessWidget {
       ),
       body: Row(
         children: [
-          Container(
-            color: Colors.blue[600],
-            width: (screenwidth / 25) + 4,
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.home,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.campaign,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.account_circle,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.supervised_user_circle,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.discount,
-                      color: Colors.white,
-                      size: 35.0,
-                    ),
-                    color: Colors.blue[600],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          sidebar(),
           SizedBox(height: 2),
           Container(
               width: screenwidth / 1.1,

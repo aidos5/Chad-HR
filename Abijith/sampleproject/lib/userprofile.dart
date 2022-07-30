@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sampleproject/sidebar.dart';
 import 'profile.dart';
 import 'employee_managment.dart';
 
@@ -65,76 +66,7 @@ class pro extends StatelessWidget {
           //withdrawn(),
           Row(
         children: [
-          Container(
-            color: Colors.blue[600],
-            width: (width / 25) + 4,
-            height: height - 56,
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.home,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.campaign,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.account_circle,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => employee_m()));
-                      },
-                      child: Icon(
-                        Icons.supervised_user_circle,
-                        color: Colors.white,
-                        size: 35.0,
-                      ),
-                      color: Colors.blue[600]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.discount,
-                      color: Colors.white,
-                      size: 35.0,
-                    ),
-                    color: Colors.blue[600],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          sidebar(),
           SizedBox(height: height - 58, width: 30),
           Column(
             //mainAxisAlignment: MainAxisAlignment.center,
