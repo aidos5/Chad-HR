@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenwidth = MediaQuery.of(context).size.width;
+    double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -88,7 +88,13 @@ class MyHomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const EmployeePerks()),
+                      );
+                    },
                     child: Icon(
                       Icons.discount,
                       color: Colors.white,
@@ -100,20 +106,21 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-              width: screenwidth / 1.1,
-              child: GridView.builder(
-                itemCount: 20,
-                itemBuilder: (context, index) => ItemTile(index),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 2.5,
-                  mainAxisSpacing: 50,
-                  crossAxisSpacing: 20,
-                ),
-              )),
         ],
       ),
     );
   }
 }
+
+          // Container(
+          //     width: screenwidth / 1.1,
+          //     child: GridView.builder(
+          //       itemCount: 20,
+          //       itemBuilder: (context, index) => ItemTile(index),
+          //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //         crossAxisCount: 2,
+          //         childAspectRatio: 2.5,
+          //         mainAxisSpacing: 50,
+          //         crossAxisSpacing: 20,
+          //       ),
+          //     )),

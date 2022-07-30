@@ -1,58 +1,100 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+import 'employee_tile.dart';
+import 'package:sampleproject/employee_tile.dart';
 
 class EmployeePerks extends StatelessWidget {
-  final int itemNo;
-
-  const EmployeePerks(
-    this.itemNo,
-  );
+  const EmployeePerks();
 
   @override
   Widget build(BuildContext context) {
+    final String title = 'Chad HR';
     var screenwidth = MediaQuery.of(context).size.width;
-    var screenheight = MediaQuery.of(context).size.height;
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(title),
+        automaticallyImplyLeading: true,
       ),
-      width: screenwidth / 3,
-      margin: const EdgeInsets.fromLTRB(35, 20, 20, 5),
-      child: Column(
+      body: Row(
         children: [
-          Expanded(
-            child: ListTile(
-              tileColor: Colors.blue,
-              onTap: () {},
-              hoverColor: Colors.orange,
+          Container(
+            color: Colors.blue[600],
+            width: (screenwidth / 25) + 4,
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.home,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      color: Colors.blue[600]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.campaign,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      color: Colors.blue[600]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.account_circle,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      color: Colors.blue[600]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                      onPressed: () {},
+                      child: Icon(
+                        Icons.supervised_user_circle,
+                        color: Colors.white,
+                        size: 35.0,
+                      ),
+                      color: Colors.blue[600]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(
+                    onPressed: () {},
+                    child: Icon(
+                      Icons.discount,
+                      color: Colors.white,
+                      size: 35.0,
+                    ),
+                    color: Colors.blue[600],
+                  ),
+                ),
+              ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(height: screenheight / 10),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: MaterialButton(
-                      color: Colors.red,
-                      onPressed: () {
-                        Navigator.defaultRouteName;
-                      },
-                      child: const Text(
-                        'Redeem',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          SizedBox(height: 2),
+          Container(
+              width: screenwidth / 1.1,
+              child: GridView.builder(
+                itemCount: 20,
+                itemBuilder: (context, index) => EmployeeTiles(index),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2.5,
+                  mainAxisSpacing: 50,
+                  crossAxisSpacing: 20,
+                ),
+              )),
         ],
       ),
     );
