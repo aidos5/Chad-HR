@@ -231,19 +231,24 @@ class _approvalState extends State<approval> {
                                                           actions: [
                                                             MaterialButton(
                                                                 onPressed: () {
-                                                                  showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (context) {
-                                                                        return Home();
-                                                                      });
+                                                                  Navigator.of(context).pushAndRemoveUntil(
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              Home()),
+                                                                      (route) =>
+                                                                          false);
                                                                 },
                                                                 child:
                                                                     Text("NO")),
                                                             MaterialButton(
-                                                                onPressed:
-                                                                    () {},
+                                                                onPressed: () {
+                                                                  Navigator.of(context).pushAndRemoveUntil(
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              Home()),
+                                                                      (route) =>
+                                                                          false);
+                                                                },
                                                                 child: Text(
                                                                     "YES")),
                                                           ],
@@ -294,19 +299,25 @@ class _approvalState extends State<approval> {
                                                               MaterialButton(
                                                                   onPressed:
                                                                       () {
-                                                                    showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            (context) {
-                                                                          return Home();
-                                                                        });
+                                                                    Navigator.of(context).pushAndRemoveUntil(
+                                                                        MaterialPageRoute(
+                                                                            builder: (context) =>
+                                                                                Home()),
+                                                                        (route) =>
+                                                                            false);
                                                                   },
                                                                   child: Text(
                                                                       "NO")),
                                                               MaterialButton(
                                                                   onPressed:
-                                                                      () {},
+                                                                      () {
+                                                                    Navigator.of(context).pushAndRemoveUntil(
+                                                                        MaterialPageRoute(
+                                                                            builder: (context) =>
+                                                                                Home()),
+                                                                        (route) =>
+                                                                            false);
+                                                                  },
                                                                   child: Text(
                                                                       "YES")),
                                                             ],

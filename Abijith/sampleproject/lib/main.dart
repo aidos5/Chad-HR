@@ -53,10 +53,9 @@ class MyHomePage extends StatelessWidget {
               )),
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => pro()),
-              );
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => pro()),
+                  (route) => false);
             },
             icon: Icon(Icons.person),
             iconSize: 40,

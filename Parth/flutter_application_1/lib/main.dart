@@ -247,15 +247,12 @@ class _HomeState extends State<Home> {
             ),
           ),
           Expanded(
-            child: GridView.builder(
-                itemCount: 50,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4, childAspectRatio: 0.8),
-                itemBuilder: ((context, index) => reject(
-                    subject: subject[index],
-                    reason: reason[index],
-                    num: index))),
-          ),
+              child: GridView.builder(
+                  itemCount: 50,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4, childAspectRatio: 0.8),
+                  itemBuilder: ((context, index) =>
+                      Boxer(child: 'Announcement')))),
 
           //Media(),
           // Container(

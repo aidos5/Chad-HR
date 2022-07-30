@@ -20,12 +20,12 @@ class sidebar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
+                  Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                           builder: (context) => MyHomePage(
                                 title: 'Chad HR',
-                              )));
+                              )),
+                      (route) => false);
                 },
                 child: Icon(
                   Icons.home,
@@ -49,10 +49,9 @@ class sidebar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Forms()),
-                  );
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => Forms()),
+                      (route) => false);
                 },
                 child: Icon(
                   Icons.assignment,
@@ -65,10 +64,9 @@ class sidebar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => approval_m()),
-                  );
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => approval_m()),
+                      (route) => false);
                 },
                 child: Icon(
                   Icons.account_circle,
@@ -81,10 +79,9 @@ class sidebar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => employee_m()),
-                  );
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => employee_m()),
+                      (route) => false);
                 },
                 child: Icon(
                   Icons.supervised_user_circle,
@@ -97,11 +94,9 @@ class sidebar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const EmployeePerks()),
-                );
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => EmployeePerks()),
+                    (route) => false);
               },
               child: Icon(
                 Icons.discount,
