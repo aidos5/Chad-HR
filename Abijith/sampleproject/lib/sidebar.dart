@@ -64,7 +64,12 @@ class sidebar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => approval_m()),
+                  );
+                },
                 child: Icon(
                   Icons.account_circle,
                   color: Colors.white,
