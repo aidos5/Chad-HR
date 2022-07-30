@@ -17,7 +17,7 @@ class SideBar extends StatefulWidget {
 class _SideBarState extends State<SideBar> {
   @override
   Widget build(BuildContext context) {
-    double screenwidth = MediaQuery.of(context).size.width;
+    var screenwidth = MediaQuery.of(context).size.width;
     return Container(
       color: Colors.blue[600],
       width: (screenwidth / 25) + 4,

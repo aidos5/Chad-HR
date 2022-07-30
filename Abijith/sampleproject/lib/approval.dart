@@ -48,7 +48,7 @@ class _approvalState extends State<approval> {
 
                   SizedBox(
                     width: 50,
-                    child: RaisedButton(
+                    child: FlatButton(
                       onPressed: () {
                         showDialog(
                             context: context,
@@ -200,7 +200,7 @@ class _approvalState extends State<approval> {
                                             SizedBox(
                                               height: 50,
                                               width: 170,
-                                              child: RaisedButton(
+                                              child: FlatButton(
                                                 onPressed: () {
                                                   showDialog(
                                                       context: context,
