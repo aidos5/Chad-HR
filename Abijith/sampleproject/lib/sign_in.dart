@@ -12,6 +12,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int user = 0;
+  String dropdownValue = 'HR';
+
+  List<String> Roles = ['HR', 'Manager', 'Boss', 'CEO', 'Employee'];
 
   var random = Random();
 
@@ -48,6 +51,28 @@ class _HomeState extends State<Home> {
                           ))),
                 ),
                 SizedBox(height: 15),
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  focusColor: Colors.amber,
+                  icon: const Icon(Icons.arrow_downward),
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.deepPurple),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                    });
+                  },
+                  items: Roles.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
                 Container(
                   padding: const EdgeInsets.all(10),
                   child: SizedBox(
@@ -61,6 +86,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
+
                 //SizedBox(height: 10),
                 Container(
                   padding: const EdgeInsets.all(10),

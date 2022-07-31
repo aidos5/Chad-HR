@@ -98,7 +98,7 @@ announcement_dialog(BuildContext context) {
                 width: 1000,
                 height: 700,
                 color: Colors.amber,
-                child: Row(
+                child: Column(
                   children: [
                     DropdownButton<String>(
                       value: dropdownValue,
@@ -122,6 +122,50 @@ announcement_dialog(BuildContext context) {
                         );
                       }).toList(),
                     ),
+                    Container(
+                      height: 100,
+                      child: Padding(
+                        padding: const EdgeInsets.all(25),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
+                          ), // BoxDecoration
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'Announcement Title',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 350,
+                      child: Padding(
+                        padding: const EdgeInsets.all(25),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
+                          ), // BoxDecoration
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'Subject',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     MaterialButton(
                       color: Colors.blue,
                       onPressed: () {
@@ -135,7 +179,7 @@ announcement_dialog(BuildContext context) {
                           style: TextStyle(
                             color: Colors.white,
                           )),
-                    )
+                    ),
                   ],
                 ),
               ),
