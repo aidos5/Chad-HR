@@ -3,9 +3,9 @@ part 'rolessave.g.dart';
 
 @JsonSerializable()
 class RolesSave {
-  final String roles;
+  String? roles;
 
-  const RolesSave({required this.roles});
+  RolesSave({this.roles});
 
   factory RolesSave.fromJson(Map<String, dynamic> json) =>
       _$RolesSaveFromJson(json);

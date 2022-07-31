@@ -9,6 +9,13 @@ import 'rolessave.dart';
 String dropdownValue = 'HR';
 
 List<String> Roles = ['HR', 'Manager', 'Boss', 'CEO', 'Employee'];
+String Title = '';
+String Subject = '';
+
+class R {
+  String unga;
+  R({required this.unga});
+}
 
 @JsonSerializable()
 class announcement extends StatelessWidget {
@@ -100,27 +107,41 @@ announcement_dialog(BuildContext context) {
                 color: Colors.amber,
                 child: Column(
                   children: [
-                    DropdownButton<String>(
-                      value: dropdownValue,
-                      icon: const Icon(Icons.arrow_downward),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.deepPurple),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValue = newValue!;
-                        });
-                      },
-                      items:
-                          Roles.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Whom To',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: const Icon(Icons.arrow_downward),
+                          elevation: 16,
+                          style: const TextStyle(color: Colors.deepPurple),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownValue = newValue!;
+                            });
+                          },
+                          items: Roles.map<DropdownMenuItem<String>>(
+                              (String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ],
                     ),
                     Container(
                       height: 100,
@@ -169,17 +190,22 @@ announcement_dialog(BuildContext context) {
                     MaterialButton(
                       color: Colors.blue,
                       onPressed: () {
-                        final R = RolesSave(roles: dropdownValue);
-                        final json = R.toJson();
-                        print('Json: ${R.toJson()}');
-                        final newroles = R.toJson();
-                        print('$newroles');
+                        // R = RolesSave(roles: dropdownValue);
+                        // R = R.toJson();
+                        // RolesSave.fromJson(R);
+                        // print('Json: ${R.toJson()}');
+                        // final newroles = R.toJson();
+                        // print('$newroles');
                       },
                       child: Text('Submit',
                           style: TextStyle(
                             color: Colors.white,
                           )),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('$R'),
+                    )
                   ],
                 ),
               ),
