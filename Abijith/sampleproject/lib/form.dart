@@ -537,9 +537,7 @@ class _FormsState extends State<Forms> {
   }
 
   OpenFormEditor(BuildContext buildContext, int formIndex) {
-
-    Map<String, dynamic> data =
-        jsonDecode(formDetails_string[formIndex]);
+    Map<String, dynamic> data = jsonDecode(formDetails_string[formIndex]);
 
     FormDetails details = FormDetails.fromJson(data);
     // Get all values here then fill it in text boxes
@@ -549,8 +547,7 @@ class _FormsState extends State<Forms> {
     TextEditingController formJsonCont = new TextEditingController();
     formJsonCont.text = details.formJSON ?? "Lowde";
 
-    List<ProcessStep> processSteps =
-        details.processSteps ?? List.empty();
+    List<ProcessStep> processSteps = details.processSteps ?? List.empty();
 
     int processCount = processSteps.length;
 
@@ -558,11 +555,11 @@ class _FormsState extends State<Forms> {
     for (int i = 0; i < processSteps.length; i++) {
       List<Animal> ani = [];
       for (int j = 0;
-          j < (processSteps[i].stepPerformers??List.empty()).length;
+          j < (processSteps[i].stepPerformers ?? List.empty()).length;
           j++) {
         Animal? reqAnimal = _animals
-            .where((element) =>
-                element.name == processSteps[i].stepPerformers![j])
+            .where(
+                (element) => element.name == processSteps[i].stepPerformers![j])
             .first;
 
         if (reqAnimal != null) {
@@ -581,7 +578,7 @@ class _FormsState extends State<Forms> {
                   length: 3,
                   child: Scaffold(
                     appBar: AppBar(
-                      title: Text("Form Creator"),
+                      title: Text("Form Editor"),
                       bottom: TabBar(tabs: [
                         Tab(
                           text: "Edit Form",
@@ -872,30 +869,31 @@ class _FormsState extends State<Forms> {
                                 height: 20,
                               ),
                               TextButton(
-                                  onPressed: () async {
-                                    String? s =
+                                  onPressed: () {
+                                    setState(() async {
+                                      String? s =
                                         await storage.read(key: 'forms');
 
-                                    print(s);
+                                      print(s);
 
-                                    // Everything Done! Publish the form here
-                                    FormDetails _formDetails = details;
-                                    _formDetails.formName = formNameCont.text;
-                                    _formDetails.formJSON = formJsonCont.text;
-                                    _formDetails.processSteps = processSteps;
+                                      // Everything Done! Publish the form here
+                                      FormDetails _formDetails = details;
+                                      _formDetails.formName = formNameCont.text;
+                                      _formDetails.formJSON = formJsonCont.text;
+                                      _formDetails.processSteps = processSteps;
 
-                                    formDetails_string[formIndex] =
-                                        json.encode(_formDetails.toJson());
+                                      formDetails_string[formIndex] =
+                                          json.encode(_formDetails.toJson());
 
-                                    // Save the process
-                                    await storage.write(
-                                        key: 'forms',
-                                        value: json.encode(formDetails_string));
+                                      // Save the process
+                                      await storage.write(
+                                          key: 'forms',
+                                          value: json.encode(formDetails_string));
 
-                                    s = await storage.read(key: 'forms');
+                                      s = await storage.read(key: 'forms');
 
-                                    print(s);
-
+                                      print(s);
+                                    });
                                     // Make it possible to display form in other menus
                                   },
                                   child: Padding(
