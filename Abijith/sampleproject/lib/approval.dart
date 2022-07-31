@@ -242,12 +242,8 @@ class _approvalState extends State<approval> {
                                                                     Text("NO")),
                                                             MaterialButton(
                                                                 onPressed: () {
-                                                                  Navigator.of(context).pushAndRemoveUntil(
-                                                                      MaterialPageRoute(
-                                                                          builder: (context) =>
-                                                                              approval_m()),
-                                                                      (route) =>
-                                                                          false);
+                                                                  reject_dialog(
+                                                                      context);
                                                                 },
                                                                 child: Text(
                                                                     "YES")),
@@ -469,12 +465,7 @@ class _approvalState extends State<approval> {
                                       child: Text("NO")),
                                   MaterialButton(
                                       onPressed: () {
-                                        Navigator.of(context)
-                                            .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        approval_m()),
-                                                (route) => false);
+                                        reject_dialog(context);
                                       },
                                       child: Text("YES")),
                                 ],
@@ -529,4 +520,46 @@ class _approvalState extends State<approval> {
           )),
     );
   }
+}
+
+reject_dialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (context, setState) {
+          return Dialog(
+              child: Container(
+                  width: 1000,
+                  height: 700,
+                  color: Color.fromARGB(255, 173, 196, 231),
+                  child: Column(
+                    children: [
+                      Text('REASON FOR REJECTION OF THE FORM'),
+                      Container(
+                        height: 100,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              border: Border.all(
+                                  color: Color.fromARGB(255, 14, 10, 10)),
+                              borderRadius: BorderRadius.circular(10),
+                            ), // BoxDecoration
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'ENTER THE REASON',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )));
+        });
+      });
 }

@@ -57,6 +57,11 @@ class SideBar extends StatelessWidget {
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => Forms()),
                       (route) => false);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Forms()),
+                  );
                 },
                 child: Icon(
                   Icons.assignment,
