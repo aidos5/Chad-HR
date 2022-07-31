@@ -8,14 +8,7 @@ import 'main.dart';
 import 'approval.dart';
 import 'approval_main.dart';
 
-class SideBar extends StatefulWidget {
-  SideBar({Key? key}) : super(key: key);
-
-  @override
-  State<SideBar> createState() => _SideBarState();
-}
-
-class _SideBarState extends State<SideBar> {
+class SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenwidth = MediaQuery.of(context).size.width;
@@ -28,12 +21,12 @@ class _SideBarState extends State<SideBar> {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
+                  Navigator.push(
+                      context,
                       MaterialPageRoute(
                           builder: (context) => MyHomePage(
                                 title: 'Chad HR',
-                              )),
-                      (route) => false);
+                              )));
                 },
                 child: Icon(
                   Icons.home,
@@ -61,9 +54,16 @@ class _SideBarState extends State<SideBar> {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
+<<<<<<< Updated upstream
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => Forms()),
                       (route) => false);
+=======
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Forms()),
+                  );
+>>>>>>> Stashed changes
                 },
                 child: Icon(
                   Icons.assignment,
@@ -76,9 +76,10 @@ class _SideBarState extends State<SideBar> {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => approval_m()),
-                      (route) => false);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => approval_m()),
+                  );
                 },
                 child: Icon(
                   Icons.account_circle,
@@ -91,9 +92,10 @@ class _SideBarState extends State<SideBar> {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => employee_m()),
-                      (route) => false);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => employee_m()),
+                  );
                 },
                 child: Icon(
                   Icons.supervised_user_circle,
@@ -106,9 +108,11 @@ class _SideBarState extends State<SideBar> {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
               onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => EmployeePerks()),
-                    (route) => false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const EmployeePerks()),
+                );
               },
               child: Icon(
                 Icons.discount,
@@ -123,10 +127,3 @@ class _SideBarState extends State<SideBar> {
     );
   }
 }
-
-// class sidebar extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-    
-//   }
-// }

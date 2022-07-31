@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    
 
 
 
@@ -49,12 +50,16 @@ dependencies:
   build_runner: ^1.0.0
   json_schema_form: ^1.1.9+2
   simple_json_form: ^0.0.3
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
     
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
