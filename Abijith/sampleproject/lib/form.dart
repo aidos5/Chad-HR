@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:sampleproject/model/DeployedForm.dart';
 import 'package:sampleproject/sidebar.dart';
 
 import 'form_tile.dart';
@@ -12,6 +13,8 @@ import 'model/ProcessStep.dart';
 import 'package:simple_json_form/simple_json_form.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'dart:convert';
+
+import 'package:sampleproject/model/UserCredentials.dart';
 
 class Animal {
   int? id;
@@ -34,7 +37,11 @@ class _FormsState extends State<Forms> {
   // init
 
   List<String> formDetails_string = [];
+  List<String> deployedForms_string = [];
   final storage = new FlutterSecureStorage();
+
+  List<UserCredentials> userCreds = [];
+  Map<int, List<UserCredentials>> _selectedUsers = {};
 
   int _cardCount = 0;
 
@@ -42,49 +49,12 @@ class _FormsState extends State<Forms> {
   String formName = "";
   String formJSON = "";
 
-  static List<Animal> _animals = [
-    Animal(id: 1, name: "Lion"),
-    Animal(id: 2, name: "Flamingo"),
-    Animal(id: 3, name: "Hippo"),
-    Animal(id: 4, name: "Horse"),
-    Animal(id: 5, name: "Tiger"),
-    Animal(id: 6, name: "Penguin"),
-    Animal(id: 7, name: "Spider"),
-    Animal(id: 8, name: "Snake"),
-    Animal(id: 9, name: "Bear"),
-    Animal(id: 10, name: "Beaver"),
-    Animal(id: 11, name: "Cat"),
-    Animal(id: 12, name: "Fish"),
-    Animal(id: 13, name: "Rabbit"),
-    Animal(id: 14, name: "Mouse"),
-    Animal(id: 15, name: "Dog"),
-    Animal(id: 16, name: "Zebra"),
-    Animal(id: 17, name: "Cow"),
-    Animal(id: 18, name: "Frog"),
-    Animal(id: 19, name: "Blue Jay"),
-    Animal(id: 20, name: "Moose"),
-    Animal(id: 21, name: "Gecko"),
-    Animal(id: 22, name: "Kangaroo"),
-    Animal(id: 23, name: "Shark"),
-    Animal(id: 24, name: "Crocodile"),
-    Animal(id: 25, name: "Owl"),
-    Animal(id: 26, name: "Dragonfly"),
-    Animal(id: 27, name: "Dolphin"),
-  ];
-  final _items = _animals
-      .map((animal) => MultiSelectItem<Animal>(animal, animal.name ?? ""))
-      .toList();
-  //List<Animal> _selectedAnimals = [];
-  List<Animal> _selectedAnimals = [];
-  List<Animal> _selectedAnimals3 = [];
-  //List<Animal> _selectedAnimals4 = [];
-  List<Animal> _selectedAnimals5 = [];
-  final _multiSelectKey = GlobalKey<FormFieldState>();
-
   @override
   void initState() {
     _cardCount = 0;
     InitFormDetails();
+    GetDeployedForms();
+    GetUserCreds();
     // TODO: implement initState
     super.initState();
   }
@@ -96,6 +66,29 @@ class _FormsState extends State<Forms> {
       formDetails_string =
           (jsonDecode(jsonString ?? "") as List<dynamic>).cast<String>();
     });
+  }
+
+  void GetDeployedForms() async {
+    //Populate form builder texts list
+    String? jsonString = await storage.read(key: 'deployedForms');
+    setState(() {
+      deployedForms_string =
+          (jsonDecode(jsonString ?? "") as List<dynamic>).cast<String>();
+    });
+  }
+
+  void GetUserCreds() async {
+    String? jsonString = await storage.read(key: 'userCredentials');
+    List<String>? userCred_string =
+        (jsonDecode(jsonString ?? "") as List<dynamic>).cast<String>();
+
+    for (String uCS in userCred_string) {
+      Map<String, dynamic> data = jsonDecode(uCS);
+
+      UserCredentials creds = UserCredentials.fromJson(data);
+
+      userCreds.add(creds);
+    }
   }
 
   @override
@@ -158,7 +151,9 @@ class _FormsState extends State<Forms> {
                               padding: const EdgeInsets.all(10.0),
                               child: MaterialButton(
                                 color: Colors.red,
-                                onPressed: () {},
+                                onPressed: () {
+                                  OpenFormDeployer(context, index);
+                                },
                                 child: const Text(
                                   'Create',
                                   style: TextStyle(
@@ -408,35 +403,35 @@ class _FormsState extends State<Forms> {
                                                     ),
 
                                                     // Getting usernames
-                                                    MultiSelectDialogField<
-                                                        Animal>(
-                                                      searchable: true,
-                                                      title: Text(
-                                                          "Who can do this?"),
-                                                      buttonText: Text(
-                                                          "Who can do this?"),
-                                                      items: _animals
-                                                          .map((e) =>
-                                                              MultiSelectItem(
-                                                                  e,
-                                                                  e.name ??
-                                                                      "Lowde"))
-                                                          .toList(),
-                                                      listType:
-                                                          MultiSelectListType
-                                                              .LIST,
-                                                      onConfirm: (values) {
-                                                        _selectedAnimals =
-                                                            values;
+                                                    // MultiSelectDialogField<
+                                                    //     Animal>(
+                                                    //   searchable: true,
+                                                    //   title: Text(
+                                                    //       "Who can do this?"),
+                                                    //   buttonText: Text(
+                                                    //       "Who can do this?"),
+                                                    //   items: _animals
+                                                    //       .map((e) =>
+                                                    //           MultiSelectItem(
+                                                    //               e,
+                                                    //               e.name ??
+                                                    //                   "Lowde"))
+                                                    //       .toList(),
+                                                    //   listType:
+                                                    //       MultiSelectListType
+                                                    //           .LIST,
+                                                    //   onConfirm: (values) {
+                                                    //     _selectedAnimals =
+                                                    //         values;
 
-                                                        processSteps[index]
-                                                                .stepPerformers =
-                                                            values
-                                                                .map((e) =>
-                                                                    e.name)
-                                                                .toList();
-                                                      },
-                                                    ),
+                                                    //     processSteps[index]
+                                                    //             .stepPerformers =
+                                                    //         values
+                                                    //             .map((e) =>
+                                                    //                 e.name)
+                                                    //             .toList();
+                                                    //   },
+                                                    // ),
                                                   ],
                                                 ),
                                               )),
@@ -551,24 +546,24 @@ class _FormsState extends State<Forms> {
 
     int processCount = processSteps.length;
 
-    Map<int, List<Animal>> selectedAnimals = {};
-    for (int i = 0; i < processSteps.length; i++) {
-      List<Animal> ani = [];
-      for (int j = 0;
-          j < (processSteps[i].stepPerformers ?? List.empty()).length;
-          j++) {
-        Animal? reqAnimal = _animals
-            .where(
-                (element) => element.name == processSteps[i].stepPerformers![j])
-            .first;
+    // Map<int, List<Animal>> selectedAnimals = {};
+    // for (int i = 0; i < processSteps.length; i++) {
+    //   List<Animal> ani = [];
+    //   for (int j = 0;
+    //       j < (processSteps[i].stepPerformers ?? List.empty()).length;
+    //       j++) {
+    //     Animal? reqAnimal = _animals
+    //         .where(
+    //             (element) => element.name == processSteps[i].stepPerformers![j])
+    //         .first;
 
-        if (reqAnimal != null) {
-          ani.add(reqAnimal);
-        }
-      }
+    //     if (reqAnimal != null) {
+    //       ani.add(reqAnimal);
+    //     }
+    //   }
 
-      selectedAnimals.addAll({i: ani});
-    }
+    //   selectedAnimals.addAll({i: ani});
+    // }
 
     showDialog(
         context: context,
@@ -779,38 +774,38 @@ class _FormsState extends State<Forms> {
                                                     ),
 
                                                     // Getting usernames
-                                                    MultiSelectDialogField<
-                                                        Animal>(
-                                                      initialValue:
-                                                          selectedAnimals[
-                                                              index],
-                                                      searchable: true,
-                                                      title: Text(
-                                                          "Who can do this?"),
-                                                      buttonText: Text(
-                                                          "Who can do this?"),
-                                                      items: _animals
-                                                          .map((e) =>
-                                                              MultiSelectItem(
-                                                                  e,
-                                                                  e.name ??
-                                                                      "Lowde"))
-                                                          .toList(),
-                                                      listType:
-                                                          MultiSelectListType
-                                                              .LIST,
-                                                      onConfirm: (values) {
-                                                        _selectedAnimals =
-                                                            values;
+                                                    // MultiSelectDialogField<
+                                                    //     Animal>(
+                                                    //   initialValue:
+                                                    //       selectedAnimals[
+                                                    //           index],
+                                                    //   searchable: true,
+                                                    //   title: Text(
+                                                    //       "Who can do this?"),
+                                                    //   buttonText: Text(
+                                                    //       "Who can do this?"),
+                                                    //   items: _animals
+                                                    //       .map((e) =>
+                                                    //           MultiSelectItem(
+                                                    //               e,
+                                                    //               e.name ??
+                                                    //                   "Lowde"))
+                                                    //       .toList(),
+                                                    //   listType:
+                                                    //       MultiSelectListType
+                                                    //           .LIST,
+                                                    //   onConfirm: (values) {
+                                                    //     _selectedAnimals =
+                                                    //         values;
 
-                                                        processSteps[index]
-                                                                .stepPerformers =
-                                                            values
-                                                                .map((e) =>
-                                                                    e.name)
-                                                                .toList();
-                                                      },
-                                                    ),
+                                                    //     processSteps[index]
+                                                    //             .stepPerformers =
+                                                    //         values
+                                                    //             .map((e) =>
+                                                    //                 e.name)
+                                                    //             .toList();
+                                                    //   },
+                                                    // ),
                                                   ],
                                                 ),
                                               )),
@@ -872,7 +867,7 @@ class _FormsState extends State<Forms> {
                                   onPressed: () {
                                     setState(() async {
                                       String? s =
-                                        await storage.read(key: 'forms');
+                                          await storage.read(key: 'forms');
 
                                       print(s);
 
@@ -888,7 +883,8 @@ class _FormsState extends State<Forms> {
                                       // Save the process
                                       await storage.write(
                                           key: 'forms',
-                                          value: json.encode(formDetails_string));
+                                          value:
+                                              json.encode(formDetails_string));
 
                                       s = await storage.read(key: 'forms');
 
@@ -909,5 +905,168 @@ class _FormsState extends State<Forms> {
                 ),
               );
             }));
+  }
+
+  OpenFormDeployer(BuildContext context, int formIndex) {
+    Map<String, dynamic> data = jsonDecode(formDetails_string[formIndex]);
+
+    FormDetails details = FormDetails.fromJson(data);
+    // Get all values here then fill it in text boxes
+    TextEditingController formNameCont = new TextEditingController();
+    formNameCont.text = details.formName ?? "Lowde";
+
+    TextEditingController formJsonCont = new TextEditingController();
+    formJsonCont.text = details.formJSON ?? "Lowde";
+
+    List<ProcessStep> processSteps = details.processSteps ?? List.empty();
+
+    int processCount = processSteps.length;
+
+    _selectedUsers = {};
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+              title: Text("Form Deploy"),
+              content: SingleChildScrollView(
+                child: Container(
+                  width: double.maxFinite,
+                  child: Column(
+                    children: [
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: processCount,
+                            itemBuilder: (context, index) {
+                              return UnconstrainedBox(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Container(
+                                    height: 200,
+                                    width: 400,
+                                    child: Card(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4)),
+                                      elevation: 20,
+                                      child: Center(
+                                          child: Column(
+                                        children: [
+                                          Container(
+                                            child: Row(children: [
+                                              Expanded(
+                                                child: Center(
+                                                  child: Text("Process Step"),
+                                                ),
+                                              ),
+                                            ]),
+                                          ),
+
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+
+                                          // Step Dropdown
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 20),
+                                            child: DropdownButton(
+                                                value: processSteps[index]
+                                                    .stepType,
+                                                items: <String>[
+                                                  'Input Step',
+                                                  'Approval Step'
+                                                ].map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(value),
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                                onChanged: null),
+                                          ),
+
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+
+                                          // Getting usernames
+                                          MultiSelectDialogField<
+                                              UserCredentials>(
+                                            searchable: true,
+                                            title: Text("Who can do this?"),
+                                            buttonText:
+                                                Text("Who can do this?"),
+                                            items: userCreds
+                                                .map((e) => MultiSelectItem(
+                                                    e, e.userName ?? "Lowde"))
+                                                .toList(),
+                                            listType: MultiSelectListType.LIST,
+                                            onConfirm: (values) {
+                                              _selectedUsers
+                                                  .addAll({index: values});
+                                            },
+                                          ),
+                                        ],
+                                      )),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () async {
+                      // Store info and put this into the respective positions
+                      _selectedUsers.removeWhere(
+                          (key, value) => key == null || value == null);
+                      DeployedForm deployedForm = DeployedForm();
+                      for (int i = 0; i < _selectedUsers.length; i++) {
+                        // print(_selectedUsers[i] != null);
+                        details.processSteps![i].stepPerformers =
+                            (_selectedUsers[i]!)
+                                .map((e) => e.userName)
+                                .toList();
+                        details.processSteps![i].stepCompleted = false;
+                      }
+                      deployedForm.formDetails = details;
+                      deployedForm.formStatus = false;
+
+                      deployedForms_string
+                          .add(jsonEncode(deployedForm.toJson()));
+
+                      await storage.write(
+                          key: 'deployedForms',
+                          value: jsonEncode(deployedForms_string));
+
+                      String? s = await storage.read(key: 'deployedForms');
+                      print(s);
+
+                      // Close dialog
+                      Navigator.pop(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text("Confirm"),
+                    ))
+              ],
+            );
+          });
+        });
   }
 }

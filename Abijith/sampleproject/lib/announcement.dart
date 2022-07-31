@@ -26,7 +26,7 @@ class R {
   R(this.rolesSave);
 }
 
-@JsonSerializable()
+// @JsonSerializable()
 class announcement extends StatelessWidget {
   List<String> Box = [
     'one',

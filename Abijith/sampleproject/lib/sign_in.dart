@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_constructors
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'dart:math';
 
 import 'package:sampleproject/main.dart';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:sampleproject/model/UserCredentials.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,14 +16,42 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int user = 0;
-  String dropdownValue = 'HR';
+  String dropdownValue = 'Employee';
 
-  List<String> Roles = ['HR', 'Manager', 'Boss', 'CEO', 'Employee'];
+  List<String> Roles = ['Boss', 'HR', 'Employee'];
 
   var random = Random();
 
+  List<String> userCred_string = [];
+  List<UserCredentials> userCreds = [];
+
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  final storage = FlutterSecureStorage();
+
+  @override
+  void initState() {
+    GetUserCreds();
+
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void GetUserCreds() async {
+    String? jsonString = await storage.read(key: 'userCredentials');
+    userCred_string =
+        (jsonDecode(jsonString ?? "") as List<dynamic>).cast<String>();
+
+    for (String uCS in userCred_string) {
+      Map<String, dynamic> data = jsonDecode(uCS);
+
+      UserCredentials creds = UserCredentials.fromJson(data);
+
+      userCreds.add(creds);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +125,7 @@ class _HomeState extends State<Home> {
                   child: SizedBox(
                     width: 500,
                     child: TextField(
-                      controller: nameController,
+                      controller: passwordController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Password',
@@ -106,7 +138,31 @@ class _HomeState extends State<Home> {
                   width: 150,
                   height: 40,
                   child: RaisedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      UserCredentials newUser = UserCredentials();
+                      newUser.userName = nameController.text;
+                      newUser.userPassword = passwordController.text;
+                      newUser.userRole = dropdownValue;
+
+                      String? s = "";
+
+                      if (!userCreds.contains(newUser)) {
+                        userCreds.add(newUser);
+                        userCred_string.add(jsonEncode(newUser.toJson()));
+
+                        await storage.write(
+                              key: 'userCredentials',
+                              value: jsonEncode(userCred_string));
+
+                        s = await storage.read(key: 'userCredentials');
+
+                        // setState(() async {
+                          
+                        // });
+                      }
+
+                      print(s);
+
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) => MyHomePage(
@@ -123,38 +179,38 @@ class _HomeState extends State<Home> {
                     //color: Color.fromARGB(255, 255, 165, 0),
                   ),
                 ),
-                Divider(height: 50),
+                // Divider(height: 50),
                 //SizedBox(height: 20),
-                FlatButton(
-                    onPressed: () {},
-                    child: Text('forgot password?',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 5, 91, 161),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
-                        ))),
+                // FlatButton(
+                //     onPressed: () {},
+                //     child: Text('forgot password?',
+                //         style: TextStyle(
+                //           color: Color.fromARGB(255, 5, 91, 161),
+                //           fontWeight: FontWeight.w600,
+                //           fontSize: 12,
+                //         ))),
 
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Dont have a account?',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 62, 71, 78),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        )),
-                    FlatButton(
-                      onPressed: () {},
-                      child: Text('Sign up',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 5, 91, 161),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          )),
-                    )
-                  ],
-                ),
+                // SizedBox(height: 20),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Text('Dont have a account?',
+                //         style: TextStyle(
+                //           color: Color.fromARGB(255, 62, 71, 78),
+                //           fontWeight: FontWeight.w600,
+                //           fontSize: 18,
+                //         )),
+                //     FlatButton(
+                //       onPressed: () {},
+                //       child: Text('Sign up',
+                //           style: TextStyle(
+                //             color: Color.fromARGB(255, 5, 91, 161),
+                //             fontWeight: FontWeight.w600,
+                //             fontSize: 18,
+                //           )),
+                //     )
+                //   ],
+                // ),
               ],
             )));
   }
