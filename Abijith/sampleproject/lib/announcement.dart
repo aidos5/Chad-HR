@@ -95,8 +95,8 @@ announcement_dialog(BuildContext context) {
       builder: (context) => StatefulBuilder(builder: (context, setState) {
             return Dialog(
               child: Container(
-                width: 700,
-                height: 1000,
+                width: 1000,
+                height: 700,
                 color: Colors.amber,
                 child: Row(
                   children: [
@@ -128,8 +128,8 @@ announcement_dialog(BuildContext context) {
                         final R = RolesSave(roles: dropdownValue);
                         final json = R.toJson();
                         print('Json: ${R.toJson()}');
-                        final newperson = R.toJson();
-                        print('$newperson');
+                        final newroles = R.toJson();
+                        print('$newroles');
                       },
                       child: Text('Submit',
                           style: TextStyle(

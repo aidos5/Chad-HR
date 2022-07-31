@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sampleproject/main_page_tile.dart';
+import 'package:sampleproject/sign_in.dart';
 import 'sidebar.dart';
 import 'profile.dart';
 import 'employee_perks.dart';
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: appTitle,
-      home: MyHomePage(title: appTitle),
+      home: Home(),
     );
   }
 }
@@ -66,16 +67,3 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-
-          // Container(
-          //     width: screenwidth / 1.1,
-          //     child: GridView.builder(
-          //       itemCount: 20,
-          //       itemBuilder: (context, index) => ItemTile(index),
-          //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //         crossAxisCount: 2,
-          //         childAspectRatio: 2.5,
-          //         mainAxisSpacing: 50,
-          //         crossAxisSpacing: 20,
-          //       ),
-          //     )),

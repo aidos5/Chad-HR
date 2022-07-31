@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:sampleproject/main.dart';
+
 class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
@@ -78,7 +80,14 @@ class _HomeState extends State<Home> {
                   width: 150,
                   height: 40,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => MyHomePage(
+                                    title: 'Chad HR',
+                                  )),
+                          (route) => false);
+                    },
                     child: Text('Login',
                         style: TextStyle(
                           color: Color.fromARGB(255, 5, 91, 161),
