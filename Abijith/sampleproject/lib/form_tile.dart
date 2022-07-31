@@ -44,9 +44,9 @@ class FormTile extends StatelessWidget {
                         builder: (context) {
                           return StatefulBuilder(builder: (context, setState) {
                             return Dialog(
-                              child: Scaffold(
+                                child: Scaffold(
                               appBar: AppBar(
-                                title: Text(formDetails.formName??"No Name"),
+                                title: Text(formDetails.formName ?? "No Name"),
                               ),
                             ));
                           });

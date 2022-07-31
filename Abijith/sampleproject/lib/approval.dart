@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-//import 'package:flutter_application_1/main.dart';
 import 'approval_main.dart';
+import 'main.dart';
 
 class approval extends StatefulWidget {
   final int num;
@@ -48,7 +48,7 @@ class _approvalState extends State<approval> {
 
                   SizedBox(
                     width: 50,
-                    child: FlatButton(
+                    child: RaisedButton(
                       onPressed: () {
                         showDialog(
                             context: context,
@@ -82,7 +82,15 @@ class _approvalState extends State<approval> {
                                               height: 55,
                                               width: 190,
                                               child: MaterialButton(
-                                                child: Text('Back'),
+                                                child: Text('Back',
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 35, 38, 40),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      letterSpacing: 2.0,
+                                                      fontSize: 25,
+                                                    )),
                                                 color: Color.fromARGB(
                                                     255, 162, 182, 201),
                                                 onPressed: () {
@@ -118,6 +126,7 @@ class _approvalState extends State<approval> {
                                           ],
                                         ),
                                         SizedBox(height: 15),
+                                        SizedBox(height: 5),
                                         Row(
                                           children: [
                                             Text(
@@ -138,7 +147,8 @@ class _approvalState extends State<approval> {
                                             )
                                           ],
                                         ),
-                                        SizedBox(height: 285),
+                                        SizedBox(height: 5),
+                                        SizedBox(height: 225),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -187,7 +197,15 @@ class _approvalState extends State<approval> {
                                                 },
                                                 color: Color.fromARGB(
                                                     255, 54, 156, 109),
-                                                child: Text('Approve'),
+                                                child: Text('Approve',
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 35, 38, 40),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      letterSpacing: 2.0,
+                                                      fontSize: 25,
+                                                    )),
                                               ),
                                             )
                                           ],
@@ -200,7 +218,7 @@ class _approvalState extends State<approval> {
                                             SizedBox(
                                               height: 50,
                                               width: 170,
-                                              child: FlatButton(
+                                              child: RaisedButton(
                                                 onPressed: () {
                                                   showDialog(
                                                       context: context,
@@ -213,19 +231,24 @@ class _approvalState extends State<approval> {
                                                           actions: [
                                                             MaterialButton(
                                                                 onPressed: () {
-                                                                  showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (context) {
-                                                                        return approval_m();
-                                                                      });
+                                                                  Navigator.of(context).pushAndRemoveUntil(
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              approval_m()),
+                                                                      (route) =>
+                                                                          false);
                                                                 },
                                                                 child:
                                                                     Text("NO")),
                                                             MaterialButton(
-                                                                onPressed:
-                                                                    () {},
+                                                                onPressed: () {
+                                                                  Navigator.of(context).pushAndRemoveUntil(
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              approval_m()),
+                                                                      (route) =>
+                                                                          false);
+                                                                },
                                                                 child: Text(
                                                                     "YES")),
                                                           ],
@@ -241,7 +264,15 @@ class _approvalState extends State<approval> {
                                                 },
                                                 color: Color.fromARGB(
                                                     255, 156, 46, 66),
-                                                child: Text('Reject'),
+                                                child: Text('Reject',
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 35, 38, 40),
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      letterSpacing: 2.0,
+                                                      fontSize: 25,
+                                                    )),
                                               ),
                                             )
                                           ],
@@ -268,19 +299,25 @@ class _approvalState extends State<approval> {
                                                               MaterialButton(
                                                                   onPressed:
                                                                       () {
-                                                                    showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            (context) {
-                                                                          return approval_m();
-                                                                        });
+                                                                    Navigator.of(context).pushAndRemoveUntil(
+                                                                        MaterialPageRoute(
+                                                                            builder: (context) =>
+                                                                                approval_m()),
+                                                                        (route) =>
+                                                                            false);
                                                                   },
                                                                   child: Text(
                                                                       "NO")),
                                                               MaterialButton(
                                                                   onPressed:
-                                                                      () {},
+                                                                      () {
+                                                                    Navigator.of(context).pushAndRemoveUntil(
+                                                                        MaterialPageRoute(
+                                                                            builder: (context) =>
+                                                                                approval_m()),
+                                                                        (route) =>
+                                                                            false);
+                                                                  },
                                                                   child: Text(
                                                                       "YES")),
                                                             ],
@@ -296,7 +333,15 @@ class _approvalState extends State<approval> {
                                                   },
                                                   color: Color.fromARGB(
                                                       255, 5, 112, 166),
-                                                  child: Text('Forward')),
+                                                  child: Text('Forward',
+                                                      style: TextStyle(
+                                                        color: Color.fromARGB(
+                                                            255, 35, 38, 40),
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        letterSpacing: 2.0,
+                                                        fontSize: 25,
+                                                      ))),
                                             )
                                           ],
                                         ),
@@ -377,7 +422,15 @@ class _approvalState extends State<approval> {
                                       },
                                       child: Text("NO")),
                                   MaterialButton(
-                                      onPressed: () {}, child: Text("YES")),
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        approval_m()),
+                                                (route) => false);
+                                      },
+                                      child: Text("YES")),
                                 ],
                                 backgroundColor:
                                     Color.fromARGB(255, 173, 234, 132),
@@ -405,15 +458,25 @@ class _approvalState extends State<approval> {
                                 actions: [
                                   MaterialButton(
                                       onPressed: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return approval_m();
-                                            });
+                                        Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        approval_m()),
+                                                (route) => false);
+                                        ;
                                       },
                                       child: Text("NO")),
                                   MaterialButton(
-                                      onPressed: () {}, child: Text("YES")),
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        approval_m()),
+                                                (route) => false);
+                                      },
+                                      child: Text("YES")),
                                 ],
                                 backgroundColor:
                                     Color.fromARGB(255, 255, 122, 122),
