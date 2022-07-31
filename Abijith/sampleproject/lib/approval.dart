@@ -528,7 +528,6 @@ reject_dialog(BuildContext context) {
       builder: (context) {
         return StatefulBuilder(builder: (context, setState) {
           return Dialog(
-<<<<<<< Updated upstream
               child: Container(
                   width: 1000,
                   height: 700,
@@ -554,46 +553,13 @@ reject_dialog(BuildContext context) {
                                   border: InputBorder.none,
                                   hintText: 'ENTER THE REASON',
                                 ),
-=======
-            child: Container(
-                width: 1000,
-                height: 700,
-                color: Color.fromARGB(255, 173, 196, 231),
-                child: Column(
-                  children: [
-                    Text('REASON FOR REJECTION OF THE FORM'),
-                    Container(
-                      height: 100,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Color.fromARGB(255, 14, 10, 10)),
-                            borderRadius: BorderRadius.circular(10),
-                          ), // BoxDecoration
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'ENTER THE REASON',
->>>>>>> Stashed changes
                               ),
                             ),
                           ),
                         ),
                       ),
-<<<<<<< Updated upstream
                     ],
                   )));
-=======
-                    ),
-                  ],
-                ))
-
-          );
->>>>>>> Stashed changes
         });
       });
 }
