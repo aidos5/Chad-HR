@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sampleproject/sidebar.dart';
 import 'profile.dart';
 import 'employee_managment.dart';
+import 'sidebar.dart';
 
 class pro extends StatelessWidget {
   @override
@@ -66,7 +67,7 @@ class pro extends StatelessWidget {
           //withdrawn(),
           Row(
         children: [
-          SideBar(),
+          sidebar(),
           SizedBox(height: height - 58, width: 30),
           Column(
             //mainAxisAlignment: MainAxisAlignment.center,

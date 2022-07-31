@@ -19,7 +19,7 @@ class EmployeePerks extends StatelessWidget {
       ),
       body: Row(
         children: [
-          SideBar(),
+          sidebar(),
           SizedBox(height: 2),
           Container(
               width: screenwidth / 1.1,

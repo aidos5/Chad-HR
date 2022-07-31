@@ -110,7 +110,7 @@ class _FormsState extends State<Forms> {
       ),
       body: Row(
         children: [
-          SideBar(),
+          sidebar(),
           SizedBox(height: 2),
           Container(
               width: screenwidth / 1.1,
@@ -537,9 +537,7 @@ class _FormsState extends State<Forms> {
   }
 
   OpenFormEditor(BuildContext buildContext, int formIndex) {
-
-    Map<String, dynamic> data =
-        jsonDecode(formDetails_string[formIndex]);
+    Map<String, dynamic> data = jsonDecode(formDetails_string[formIndex]);
 
     FormDetails details = FormDetails.fromJson(data);
     // Get all values here then fill it in text boxes
@@ -549,8 +547,7 @@ class _FormsState extends State<Forms> {
     TextEditingController formJsonCont = new TextEditingController();
     formJsonCont.text = details.formJSON ?? "Lowde";
 
-    List<ProcessStep> processSteps =
-        details.processSteps ?? List.empty();
+    List<ProcessStep> processSteps = details.processSteps ?? List.empty();
 
     int processCount = processSteps.length;
 
@@ -558,11 +555,11 @@ class _FormsState extends State<Forms> {
     for (int i = 0; i < processSteps.length; i++) {
       List<Animal> ani = [];
       for (int j = 0;
-          j < (processSteps[i].stepPerformers??List.empty()).length;
+          j < (processSteps[i].stepPerformers ?? List.empty()).length;
           j++) {
         Animal? reqAnimal = _animals
-            .where((element) =>
-                element.name == processSteps[i].stepPerformers![j])
+            .where(
+                (element) => element.name == processSteps[i].stepPerformers![j])
             .first;
 
         if (reqAnimal != null) {

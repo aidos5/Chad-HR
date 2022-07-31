@@ -563,7 +563,7 @@ class _FormBuilderState extends State<FormBuilder> {
               return Dialog(
                 child: Scaffold(
                   appBar: AppBar(
-                    title: Text(formDetails.formName??"No Name"),
+                    title: Text(formDetails.formName ?? "No Name"),
                   ),
                   body: SingleChildScrollView(
                     child: Column(
@@ -617,95 +617,103 @@ class _FormBuilderState extends State<FormBuilder> {
     "form": [
       {
         "key": "informations",
-        "properties": [{
-          "key": "identifier",
-          "fields": ["1", "2", "3", "4", "5"],
-          "title": "This is my title",
-          "description": "This is my description",
-          "type": "multiple",
-        }]
-      },
-      {
-        "key": "informations",
-        "properties": [{
-          "key": "identifier_boat",
-          "fields": ["1", "2", "3", "4", "5"],
-          "title": "This is my title",
-          "description": "This is my description",
-          "type": "format1",
-          "raw": [
-            {
-              "title": "Menu 1",
-              "description": "description 1",
-              "properties": [
-                {
-                  "key": "key_date",
-                  "title": "date",
-                  "type": "date",
-                },
-              ]
-            },
-            {
-              "title": "Menu 2",
-              "properties": [
-                {
-                  "key": "key_trips",
-                  "title": "Trips",
-                  "type": "text",
-                },
-              ]
-            },
-          ]
-        }]
-      },
-
-      {
-        "key": "informations",
-        "properties": [{
-          "key": "identifier",
-          "fields": ["1", "2", "3", "4", "5"],
-          "title": "This is my title",
-          "description": "This is my description",
-          "type": "checkbox"
-        }]
-      },
-
-      {
-        "key": "informations",
-        "properties": [{
-          "key": "identifier",
-          "title": "This is my title",
-          "description": "This is my description",
-          "type": "text",
-          "is_mandatory": false,
-          "readOnly": true,
-          "validations": {
-                "message": "This is my message",
-            "length": {"min": 10, "max": 20},
+        "properties": [
+          {
+            "key": "identifier",
+            "fields": ["1", "2", "3", "4", "5"],
+            "title": "This is my title",
+            "description": "This is my description",
+            "type": "multiple",
           }
-        }]
+        ]
       },
-
       {
         "key": "informations",
-        "properties": [{
-          "key": "identifier",
-          "title": "This is my title",
-          "description": "This is my description",
-          "type": "date",
-          "is_mandatory": false,
-        }]
+        "properties": [
+          {
+            "key": "identifier_boat",
+            "fields": ["1", "2", "3", "4", "5"],
+            "title": "This is my title",
+            "description": "This is my description",
+            "type": "format1",
+            "raw": [
+              {
+                "title": "Menu 1",
+                "description": "description 1",
+                "properties": [
+                  {
+                    "key": "key_date",
+                    "title": "date",
+                    "type": "date",
+                  },
+                ]
+              },
+              {
+                "title": "Menu 2",
+                "properties": [
+                  {
+                    "key": "key_trips",
+                    "title": "Trips",
+                    "type": "text",
+                  },
+                ]
+              },
+            ]
+          }
+        ]
       },
-
       {
         "key": "informations",
-        "properties": [{
-          "key": "identifier_boat",
-          "title": "This is my title",
-          "description": "This is my description",
-          "type": "time",
-          "is_mandatory": false,
-        }]
+        "properties": [
+          {
+            "key": "identifier",
+            "fields": ["1", "2", "3", "4", "5"],
+            "title": "This is my title",
+            "description": "This is my description",
+            "type": "checkbox"
+          }
+        ]
+      },
+      {
+        "key": "informations",
+        "properties": [
+          {
+            "key": "identifier",
+            "title": "This is my title",
+            "description": "This is my description",
+            "type": "text",
+            "is_mandatory": false,
+            "readOnly": true,
+            "validations": {
+              "message": "This is my message",
+              "length": {"min": 10, "max": 20},
+            }
+          }
+        ]
+      },
+      {
+        "key": "informations",
+        "properties": [
+          {
+            "key": "identifier",
+            "title": "This is my title",
+            "description": "This is my description",
+            "type": "date",
+            "is_mandatory": false,
+          }
+        ]
+      },
+      {
+        "key": "informations",
+        "properties": [
+          {
+            "key": "identifier_boat",
+            "title": "This is my title",
+            "description": "This is my description",
+            "type": "time",
+            "is_mandatory": false,
+          }
+        ]
       }
     ]
   });
