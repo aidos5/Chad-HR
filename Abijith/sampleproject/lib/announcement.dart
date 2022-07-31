@@ -2,9 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'dart:math';
-
+import 'package:json_annotation/json_annotation.dart';
 import 'announcement_box.dart';
+import 'rolessave.dart';
 
+String dropdownValue = 'HR';
+
+List<String> Roles = ['HR', 'Manager', 'Boss', 'CEO', 'Employee'];
+
+@JsonSerializable()
 class announcement extends StatelessWidget {
   List<String> Box = [
     'one',
@@ -73,6 +79,66 @@ class announcement extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          announcement_dialog(context);
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
+}
+
+announcement_dialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(builder: (context, setState) {
+            return Dialog(
+              child: Container(
+                width: 700,
+                height: 1000,
+                color: Colors.amber,
+                child: Row(
+                  children: [
+                    DropdownButton<String>(
+                      value: dropdownValue,
+                      icon: const Icon(Icons.arrow_downward),
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.deepPurple),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropdownValue = newValue!;
+                        });
+                      },
+                      items:
+                          Roles.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                    MaterialButton(
+                      color: Colors.blue,
+                      onPressed: () {
+                        final R = RolesSave(roles: dropdownValue);
+                        final json = R.toJson();
+                        print('Json: ${R.toJson()}');
+                        final newperson = R.toJson();
+                        print('$newperson');
+                      },
+                      child: Text('Submit',
+                          style: TextStyle(
+                            color: Colors.white,
+                          )),
+                    )
+                  ],
+                ),
+              ),
+            );
+          }));
 }

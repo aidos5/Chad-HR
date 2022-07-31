@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sampleproject/announcement.dart';
 import 'employee_perks.dart';
 import 'employee_managment.dart';
 import 'employee.dart';
@@ -44,7 +45,11 @@ class _SideBarState extends State<SideBar> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => announcement()),
+                      (route) => false);
+                },
                 child: Icon(
                   Icons.campaign,
                   color: Colors.white,
@@ -57,7 +62,7 @@ class _SideBarState extends State<SideBar> {
             child: RaisedButton(
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => approval_m()),
+                      MaterialPageRoute(builder: (context) => Forms()),
                       (route) => false);
                 },
                 child: Icon(
