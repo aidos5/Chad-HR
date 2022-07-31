@@ -11,10 +11,19 @@ String dropdownValue = 'HR';
 List<String> Roles = ['HR', 'Manager', 'Boss', 'CEO', 'Employee'];
 String Title = '';
 String Subject = '';
+//var newroles;
+
+class newroles {
+  String? name;
+
+  newroles({
+    this.name,
+  });
+}
 
 class R {
-  String unga;
-  R({required this.unga});
+  RolesSave rolesSave;
+  R(this.rolesSave);
 }
 
 @JsonSerializable()
@@ -190,12 +199,7 @@ announcement_dialog(BuildContext context) {
                     MaterialButton(
                       color: Colors.blue,
                       onPressed: () {
-                        // R = RolesSave(roles: dropdownValue);
-                        // R = R.toJson();
-                        // RolesSave.fromJson(R);
-                        // print('Json: ${R.toJson()}');
-                        // final newroles = R.toJson();
-                        // print('$newroles');
+                        RolesSave(roles: dropdownValue);
                       },
                       child: Text('Submit',
                           style: TextStyle(
@@ -204,7 +208,6 @@ announcement_dialog(BuildContext context) {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('$R'),
                     )
                   ],
                 ),

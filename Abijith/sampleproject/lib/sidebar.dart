@@ -54,16 +54,9 @@ class SideBar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-<<<<<<< Updated upstream
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => Forms()),
                       (route) => false);
-=======
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Forms()),
-                  );
->>>>>>> Stashed changes
                 },
                 child: Icon(
                   Icons.assignment,
