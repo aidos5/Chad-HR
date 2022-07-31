@@ -56,12 +56,9 @@ class _SideBarState extends State<SideBar> {
             padding: const EdgeInsets.all(8.0),
             child: RaisedButton(
                 onPressed: () {
-                  setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Forms()),
-                    );
-                  });
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => approval_m()),
+                      (route) => false);
                 },
                 child: Icon(
                   Icons.assignment,
