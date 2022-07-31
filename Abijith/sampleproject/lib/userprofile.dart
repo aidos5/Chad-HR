@@ -67,7 +67,7 @@ class pro extends StatelessWidget {
           //withdrawn(),
           Row(
         children: [
-          sidebar(),
+          SideBar(),
           SizedBox(height: height - 58, width: 30),
           Column(
             //mainAxisAlignment: MainAxisAlignment.center,
