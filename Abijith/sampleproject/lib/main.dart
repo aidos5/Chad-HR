@@ -7,11 +7,10 @@ import 'employee_perks.dart';
 import 'form.dart';
 import 'userprofile.dart';
 
-void main() => runApp(const MyApp());
+void main() =>
+    runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   static const appTitle = 'Chad HR';
 
   @override

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'approval_main.dart';
@@ -16,6 +16,7 @@ class approval extends StatefulWidget {
 class _approvalState extends State<approval> {
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
       child: Container(
@@ -180,8 +181,39 @@ class _approvalState extends State<approval> {
                                                                 child:
                                                                     Text("NO")),
                                                             MaterialButton(
-                                                                onPressed:
-                                                                    () {},
+                                                                onPressed: () {
+                                                                  showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (context) {
+                                                                        return AlertDialog(
+                                                                          //title: Text("APPROVE FORM"),
+                                                                          title: Text(
+                                                                              "THE FORM HAS BEEN APPROVED",
+                                                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+                                                                          content:
+                                                                              Text(''),
+                                                                          actions: [
+                                                                            MaterialButton(
+                                                                                onPressed: () {
+                                                                                  showDialog(
+                                                                                      context: context,
+                                                                                      builder: (context) {
+                                                                                        return approval_m();
+                                                                                      });
+                                                                                },
+                                                                                child: Text("Okay")),
+                                                                          ],
+                                                                          backgroundColor: Color.fromARGB(
+                                                                              255,
+                                                                              171,
+                                                                              240,
+                                                                              125),
+                                                                        );
+                                                                        ;
+                                                                      });
+                                                                },
                                                                 child: Text(
                                                                     "YES")),
                                                           ],
@@ -419,12 +451,34 @@ class _approvalState extends State<approval> {
                                       child: Text("NO")),
                                   MaterialButton(
                                       onPressed: () {
-                                        Navigator.of(context)
-                                            .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        approval_m()),
-                                                (route) => false);
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                //title: Text("APPROVE FORM"),
+                                                title: Text(
+                                                    "THE FORM HAS BEEN APPROVED",
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                                content: Text(''),
+                                                actions: [
+                                                  MaterialButton(
+                                                      onPressed: () {
+                                                        showDialog(
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return approval_m();
+                                                            });
+                                                      },
+                                                      child: Text("Okay")),
+                                                ],
+                                                backgroundColor: Color.fromARGB(
+                                                    255, 171, 240, 125),
+                                              );
+                                              ;
+                                            });
                                       },
                                       child: Text("YES")),
                                 ],
@@ -526,15 +580,35 @@ reject_dialog(BuildContext context) {
   showDialog(
       context: context,
       builder: (context) {
+        double screenwidth = MediaQuery.of(context).size.width;
         return StatefulBuilder(builder: (context, setState) {
           return Dialog(
               child: Container(
                   width: 1000,
                   height: 700,
-                  color: Color.fromARGB(255, 173, 196, 231),
+                  color: Color.fromARGB(255, 237, 171, 171),
                   child: Column(
                     children: [
-                      Text('REASON FOR REJECTION OF THE FORM'),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.arrow_back),
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return approval_m();
+                                  });
+                            },
+                          ),
+                          SizedBox(
+                            width: screenwidth / 4,
+                          ),
+                          Text('REASON FOR REJECTION OF THE FORM',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w500)),
+                        ],
+                      ),
                       Container(
                         height: 100,
                         child: Padding(
@@ -558,8 +632,29 @@ reject_dialog(BuildContext context) {
                           ),
                         ),
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          RaisedButton(
+                            onPressed: () {},
+                            color: Color.fromARGB(255, 230, 111, 102),
+                            child: Text('SUBMIT'),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          )
+                        ],
+                      ),
                     ],
                   )));
         });
+      });
+}
+
+approve_dialog(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return Container();
       });
 }

@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:json_annotation/json_annotation.dart';
 import 'announcement_box.dart';
 import 'rolessave.dart';
+import 'main.dart';
 
 String dropdownValue = 'HR';
 
@@ -53,6 +54,7 @@ class announcement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color.fromARGB(249, 243, 229, 202),
       appBar: AppBar(
@@ -71,13 +73,30 @@ class announcement extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: 10),
-          Text(
-            'ANNOUNCEMENTS',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Color.fromARGB(185, 0, 0, 0),
-            ),
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return MyHomePage(title: 'CHAD HR');
+                      });
+                },
+              ),
+              SizedBox(
+                width: screenwidth / 2.4,
+              ),
+              Text(
+                'ANNOUNCEMENTS',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Color.fromARGB(185, 0, 0, 0),
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 10),
           Expanded(

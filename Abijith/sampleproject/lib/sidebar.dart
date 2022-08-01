@@ -7,6 +7,7 @@ import 'form.dart';
 import 'main.dart';
 import 'approval.dart';
 import 'approval_main.dart';
+import 'reject_main.dart';
 
 class SideBar extends StatelessWidget {
   @override
@@ -55,13 +56,13 @@ class SideBar extends StatelessWidget {
             child: RaisedButton(
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => Forms()),
+                      MaterialPageRoute(builder: (context) => reject_m()),
                       (route) => false);
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Forms()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => Forms()),
+                  // );
                 },
                 child: Icon(
                   Icons.assignment,

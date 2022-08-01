@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'approval.dart';
 import 'employee.dart';
+import 'main.dart';
 
 class approval_m extends StatefulWidget {
   @override
@@ -115,14 +116,29 @@ class _HomeState extends State<approval_m> {
         body: Column(
           children: [
             SizedBox(height: 5),
-            Text(
-              'APPROVAL FORMS',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Color.fromARGB(185, 0, 0, 0),
-                decoration: TextDecoration.underline,
-              ),
+            Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return MyHomePage(title: 'CHAD HR');
+                        });
+                  },
+                ),
+                SizedBox(width: screenwidth / 2.55),
+                Text(
+                  'APPROVAL FORMS',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(185, 0, 0, 0),
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
             ),
             Expanded(
               child: GridView.builder(
