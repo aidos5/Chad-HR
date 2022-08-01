@@ -16,7 +16,7 @@ class EmployeeTiles extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: Colors.blue,
+        color: Color.fromARGB(255, 155, 197, 232),
       ),
       width: screenwidth / 3,
       margin: const EdgeInsets.fromLTRB(35, 20, 20, 5),
@@ -24,9 +24,9 @@ class EmployeeTiles extends StatelessWidget {
         children: [
           Expanded(
             child: ListTile(
-              tileColor: Colors.blue,
+              tileColor: Color.fromARGB(255, 123, 186, 238),
               onTap: () {},
-              hoverColor: Colors.orange,
+              hoverColor: Color.fromARGB(255, 254, 236, 210),
             ),
           ),
           Row(

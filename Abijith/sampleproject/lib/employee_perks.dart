@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:sampleproject/sidebar.dart';
 
@@ -12,6 +14,7 @@ class EmployeePerks extends StatelessWidget {
     final String title = 'Chad HR';
     var screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 228, 213, 161),
       appBar: AppBar(
         centerTitle: true,
         title: Text(title),
