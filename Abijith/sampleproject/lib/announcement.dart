@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:json_annotation/json_annotation.dart';
 import 'announcement_box.dart';
 import 'rolessave.dart';
 import 'main.dart';
+
 
 String dropdownValue = 'HR';
 
@@ -27,7 +27,6 @@ class R {
   R(this.rolesSave);
 }
 
-// @JsonSerializable()
 class announcement extends StatelessWidget {
   List<String> Box = [
     'one',

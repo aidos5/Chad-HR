@@ -17,5 +17,5 @@ Map<String, dynamic> _$DeployedFormToJson(DeployedForm instance) =>
     <String, dynamic>{
       'formDetails': instance.formDetails?.toJson(),
       'formStatus': instance.formStatus,
-      'formClarification': instance.formClarification
+      'formClarification': instance.formClarification,
     };

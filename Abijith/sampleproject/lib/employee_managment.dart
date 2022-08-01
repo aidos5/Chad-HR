@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:sampleproject/model/GiveBadgeContract.dart';
 //import 'package:flutter_application_1/employee.dart';
 import 'dart:math';
 import 'package:sampleproject/model/UserCredentials.dart';
@@ -20,6 +21,8 @@ class _employee_mState extends State<employee_m> {
   final storage = FlutterSecureStorage();
   List<String> userCred_string = [];
   List<UserCredentials> userCreds = [];
+
+  final badgeInterface = GiveBadgeContract();
 
   @override
   void initState() {
@@ -79,7 +82,7 @@ class _employee_mState extends State<employee_m> {
           Expanded(
             child: GridView.builder(
               itemBuilder: ((context, index) =>
-                  Empl.withName(name: userCreds[index].userName ?? "Lowde")),
+                  Empl.withName(name: userCreds[index].userName ?? "Lowde", giveBadgeContract: badgeInterface,)),
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
               itemCount: userCreds.length,

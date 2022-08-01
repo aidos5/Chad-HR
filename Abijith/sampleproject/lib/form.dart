@@ -38,6 +38,7 @@ class _FormsState extends State<Forms> {
 
   List<String> formDetails_string = [];
   List<String> deployedForms_string = [];
+  List<DeployedForm> deployedForms = [];
   final storage = new FlutterSecureStorage();
 
   List<UserCredentials> userCreds = [];
@@ -75,6 +76,12 @@ class _FormsState extends State<Forms> {
       deployedForms_string =
           (jsonDecode(jsonString ?? "") as List<dynamic>).cast<String>();
     });
+
+    for (String s in deployedForms_string) {
+      Map<String, dynamic> data = jsonDecode(s);
+
+      deployedForms.add(DeployedForm.fromJson(data));
+    }
   }
 
   void GetUserCreds() async {
