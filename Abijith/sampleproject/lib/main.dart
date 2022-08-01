@@ -42,8 +42,8 @@ class MyHomePage extends StatelessWidget {
           Container(
               width: screenwidth / 1.1,
               child: GridView.builder(
-                itemCount: 3,
-                itemBuilder: (context, index) => MainPageTile(index),
+                itemCount: 1,
+                itemBuilder: (context, index) => MainPageTile(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1,
                   childAspectRatio: 5,

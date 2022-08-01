@@ -27,7 +27,7 @@ class MainPage extends StatelessWidget {
               width: screenwidth / 1.1,
               child: GridView.builder(
                 itemCount: 20,
-                itemBuilder: (context, index) => MainPageTile(index),
+                itemBuilder: (context, index) => MainPageTile(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 2.5,

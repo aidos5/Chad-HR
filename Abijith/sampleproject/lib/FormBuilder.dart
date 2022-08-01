@@ -151,7 +151,7 @@ class _FormBuilderState extends State<FormBuilder> {
                                                             formName = value
                                                                 .toString();
 
-                                                            print(formName);
+                                                            //print(formName);
                                                           },
                                                         )),
                                                     decoration: InputDecoration(
@@ -183,7 +183,7 @@ class _FormBuilderState extends State<FormBuilder> {
                                                     onChanged: (value) =>
                                                         setState((() {
                                                       formJSON = value;
-                                                      print(formJSON);
+                                                      //print(formJSON);
                                                     })),
                                                     maxLines: 20,
                                                     keyboardType:
@@ -412,7 +412,7 @@ class _FormBuilderState extends State<FormBuilder> {
                                                 String? s = await storage.read(
                                                     key: 'forms');
 
-                                                print(s);
+                                                //print(s);
 
                                                 // Everything Done! Publish the form here
                                                 FormDetails _formDetails =
@@ -437,7 +437,7 @@ class _FormBuilderState extends State<FormBuilder> {
                                                 s = await storage.read(
                                                     key: 'forms');
 
-                                                print(s);
+                                                //print(s);
 
                                                 // Make it possible to display form in other menus
                                               },
@@ -471,7 +471,7 @@ class _FormBuilderState extends State<FormBuilder> {
                         .cast<String>();
 
                 for (String s in formDetails_string) {
-                  print(s);
+                  //print(s);
                 }
                 // Show forms dialog
                 showDialog(
@@ -503,7 +503,7 @@ class _FormBuilderState extends State<FormBuilder> {
                                               FormDetails details =
                                                   FormDetails.fromJson(data);
 
-                                              print(data);
+                                              //print(data);
 
                                               return UnconstrainedBox(
                                                 child: Container(
@@ -598,10 +598,10 @@ class _FormBuilderState extends State<FormBuilder> {
                           ),
                           onSubmit: (val) {
                             if (val == null) {
-                              print("no data");
+                              //print("no data");
                             } else {
                               var json = jsonEncode(val.toJson());
-                              print(json);
+                              //print(json);
                             }
                           },
                         ),

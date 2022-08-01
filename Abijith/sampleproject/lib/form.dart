@@ -248,7 +248,7 @@ class _FormsState extends State<Forms> {
                                               () {
                                                 formName = value.toString();
 
-                                                print(formName);
+                                                //print(formName);
                                               },
                                             )),
                                         decoration: InputDecoration(
@@ -276,7 +276,7 @@ class _FormsState extends State<Forms> {
                                       child: TextField(
                                         onChanged: (value) => setState((() {
                                           formJSON = value;
-                                          print(formJSON);
+                                          //print(formJSON);
                                         })),
                                         maxLines: 20,
                                         keyboardType: TextInputType.multiline,
@@ -500,7 +500,7 @@ class _FormsState extends State<Forms> {
                                     String? s =
                                         await storage.read(key: 'forms');
 
-                                    print(s);
+                                    //print(s);
 
                                     // Everything Done! Publish the form here
                                     FormDetails _formDetails =
@@ -519,7 +519,7 @@ class _FormsState extends State<Forms> {
 
                                     s = await storage.read(key: 'forms');
 
-                                    print(s);
+                                    //print(s);
 
                                     // Make it possible to display form in other menus
                                   },
@@ -832,7 +832,7 @@ class _FormsState extends State<Forms> {
                                   onPressed: () {
                                     setState(() {
                                       processCount++;
-                                      print("yoyo" + processCount.toString());
+                                      //print("yoyo" + processCount.toString());
 
                                       ProcessStep p = new ProcessStep();
 
@@ -876,7 +876,7 @@ class _FormsState extends State<Forms> {
                                       String? s =
                                           await storage.read(key: 'forms');
 
-                                      print(s);
+                                      //print(s);
 
                                       // Everything Done! Publish the form here
                                       FormDetails _formDetails = details;
@@ -895,7 +895,7 @@ class _FormsState extends State<Forms> {
 
                                       s = await storage.read(key: 'forms');
 
-                                      print(s);
+                                      //print(s);
                                     });
                                     // Make it possible to display form in other menus
                                   },
@@ -1051,13 +1051,12 @@ class _FormsState extends State<Forms> {
                         details.processSteps![i].stepCompleted = false;
                       }
                       deployedForm.formDetails = details;
-                      deployedForm.formStatus = false;
-
-                      print(deployedForm.toJson());
+                      //print(deployedForm.toJson());
 
                       deployedForms_string
                           .add(jsonEncode(deployedForm.toJson()));
-
+                      //print(deployedForms_string);
+                      jsonEncode(deployedForms_string);
                       await storage.write(
                           key: 'deployedForms',
                           value: jsonEncode(deployedForms_string));

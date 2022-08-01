@@ -5,7 +5,7 @@ part 'ProcessStep.g.dart';
 
 // @JsonSerializable()
 class ProcessStep {
-  String? stepType = "";
+  String? stepType = '';
   List<String?>? stepPerformers = [];
   bool? stepCompleted;
 

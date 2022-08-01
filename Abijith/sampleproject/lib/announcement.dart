@@ -12,20 +12,6 @@ String dropdownValue = 'HR';
 List<String> Roles = ['HR', 'Manager', 'Boss', 'CEO', 'Employee'];
 String Title = '';
 String Subject = '';
-//var newroles;
-
-class newroles {
-  String? name;
-
-  newroles({
-    this.name,
-  });
-}
-
-class R {
-  RolesSave rolesSave;
-  R(this.rolesSave);
-}
 
 class announcement extends StatelessWidget {
   List<String> Box = [
@@ -217,16 +203,13 @@ announcement_dialog(BuildContext context) {
                     MaterialButton(
                       color: Colors.blue,
                       onPressed: () {
-                        RolesSave(roles: dropdownValue);
+                        final R = RolesSave(roles: dropdownValue);
                       },
                       child: Text('Submit',
                           style: TextStyle(
                             color: Colors.white,
                           )),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                    )
                   ],
                 ),
               ),

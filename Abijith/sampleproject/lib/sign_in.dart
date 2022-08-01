@@ -169,9 +169,11 @@ class _HomeState extends State<Home> {
                       }
 
                       UserCredentials curUser = newUser;
-                      await storage.write(key: 'currentUser', value: jsonEncode(curUser.toJson()));
+                      await storage.write(
+                          key: 'currentUser',
+                          value: jsonEncode(curUser.toJson()));
 
-                      print(s);
+                      //print(s);
 
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
