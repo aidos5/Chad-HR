@@ -1013,8 +1013,7 @@ class _FormsState extends State<Forms> {
                                                 .toList(),
                                             listType: MultiSelectListType.LIST,
                                             onConfirm: (values) {
-                                              _selectedUsers
-                                                  .addAll({index: values});
+                                              _selectedUsers[index] = values;
                                             },
                                           ),
                                         ],
@@ -1033,8 +1032,8 @@ class _FormsState extends State<Forms> {
                 TextButton(
                     onPressed: () async {
                       // Store info and put this into the respective positions
-                      _selectedUsers.removeWhere(
-                          (key, value) => key == null || value == null);
+                      // _selectedUsers.removeWhere(
+                      //     (key, value) => key == null || value == null);
                       DeployedForm deployedForm = DeployedForm();
                       for (int i = 0; i < _selectedUsers.length; i++) {
                         // print(_selectedUsers[i] != null);
@@ -1046,6 +1045,8 @@ class _FormsState extends State<Forms> {
                       }
                       deployedForm.formDetails = details;
                       deployedForm.formStatus = false;
+
+                      print(deployedForm.toJson());
 
                       deployedForms_string
                           .add(jsonEncode(deployedForm.toJson()));

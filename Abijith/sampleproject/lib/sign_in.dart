@@ -145,21 +145,31 @@ class _HomeState extends State<Home> {
                       newUser.userRole = dropdownValue;
 
                       String? s = "";
+                      bool hasUser = false;
 
-                      if (!userCreds.contains(newUser)) {
+                      for (UserCredentials u in userCreds) {
+                        if (u.idEqual(newUser)) {
+                          hasUser = true;
+                        }
+                      }
+
+                      if (!hasUser) {
                         userCreds.add(newUser);
                         userCred_string.add(jsonEncode(newUser.toJson()));
 
                         await storage.write(
-                              key: 'userCredentials',
-                              value: jsonEncode(userCred_string));
+                            key: 'userCredentials',
+                            value: jsonEncode(userCred_string));
 
                         s = await storage.read(key: 'userCredentials');
 
                         // setState(() async {
-                          
+
                         // });
                       }
+
+                      UserCredentials curUser = newUser;
+                      await storage.write(key: 'currentUser', value: jsonEncode(curUser.toJson()));
 
                       print(s);
 

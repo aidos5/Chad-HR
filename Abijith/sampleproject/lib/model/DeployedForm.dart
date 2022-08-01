@@ -11,6 +11,7 @@ part 'DeployedForm.g.dart';
 class DeployedForm {
   FormDetails? formDetails;
   bool? formStatus;
+  String? formClarification;
 
   DeployedForm();
 

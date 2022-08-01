@@ -9,6 +9,12 @@ class UserCredentials {
   String? userPassword;
   String? userRole;
 
+  bool idEqual(UserCredentials uc) {
+    return uc.userName == userName &&
+        uc.userPassword == userPassword &&
+        uc.userRole == userRole;
+  }
+
   UserCredentials();
 
   factory UserCredentials.fromJson(Map<String, dynamic> data) =>
