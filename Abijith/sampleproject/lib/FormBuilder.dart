@@ -11,6 +11,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'model/FormDetails.dart';
 import 'model/ProcessStep.dart';
+import 'SecureStorage.dart';
 
 import 'package:simple_json_form/simple_json_form.dart';
 
@@ -33,7 +34,7 @@ class Animal {
 
 class _FormBuilderState extends State<FormBuilder> {
   List<String> formDetails_string = [];
-  final storage = new FlutterSecureStorage();
+  final storage = SecureStorage(FlutterSecureStorage());
 
   int _cardCount = 0;
 
@@ -541,7 +542,7 @@ class _FormBuilderState extends State<FormBuilder> {
           TextButton(
               onPressed: () async {
                 setState(() async {
-                  await storage.deleteAll();
+                  // await storage.deleteAll();
                   String? jsonString = await storage.read(key: 'forms');
                   formDetails_string = [];
                   _cardCount = 0;

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:sampleproject/SecureStorage.dart';
 import 'package:sampleproject/model/GiveBadgeContract.dart';
 //import 'package:flutter_application_1/employee.dart';
 import 'dart:math';
@@ -18,7 +19,7 @@ class employee_m extends StatefulWidget {
 }
 
 class _employee_mState extends State<employee_m> {
-  final storage = FlutterSecureStorage();
+  final storage = SecureStorage(FlutterSecureStorage());
   List<String> userCred_string = [];
   List<UserCredentials> userCreds = [];
 

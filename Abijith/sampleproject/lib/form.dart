@@ -13,6 +13,7 @@ import 'model/ProcessStep.dart';
 import 'package:simple_json_form/simple_json_form.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'dart:convert';
+import 'SecureStorage.dart';
 
 import 'package:sampleproject/model/UserCredentials.dart';
 
@@ -39,7 +40,7 @@ class _FormsState extends State<Forms> {
   List<String> formDetails_string = [];
   List<String> deployedForms_string = [];
   List<DeployedForm> deployedForms = [];
-  final storage = new FlutterSecureStorage();
+  final storage = SecureStorage(FlutterSecureStorage());
 
   List<UserCredentials> userCreds = [];
   Map<int, List<UserCredentials>> _selectedUsers = {};

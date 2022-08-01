@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 import 'package:sampleproject/main.dart';
+import 'SecureStorage.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sampleproject/model/UserCredentials.dart';
@@ -28,7 +29,7 @@ class _HomeState extends State<Home> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  final storage = FlutterSecureStorage();
+  final storage = SecureStorage(FlutterSecureStorage());
 
   @override
   void initState() {

@@ -5,11 +5,13 @@ import 'dart:convert';
 import 'FormBuilder.dart';
 import 'package:sampleproject/model/FormDetails.dart';
 
+import 'SecureStorage.dart';
+
 class FormTile extends StatelessWidget {
   final int itemNo;
   FormDetails formDetails;
 
-  final storage = FlutterSecureStorage();
+  final storage = SecureStorage(FlutterSecureStorage());
 
   List<String> formDetails_string = [];
 
