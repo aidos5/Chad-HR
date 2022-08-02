@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:sampleproject/main_page_tile.dart';
 import 'package:sampleproject/sign_in.dart';
@@ -15,6 +17,11 @@ import 'dart:convert';
 import 'package:sampleproject/model/UserCredentials.dart';
 import 'userprofile.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'package:simple_json_form/simple_json_form.dart';
+import 'package:sampleproject/model/FormDetails.dart';
+
+import 'JsonForms.dart' as jsonForm;
 
 void main() =>
     runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Home()));
@@ -96,7 +103,10 @@ class MyHomePage extends State<MyApp> {
               deployedForms[i].formDetails!.processSteps![j].stepType! ==
                   'Approval Step') {
             print('Lowde');
-            PendingForms!.add(deployedForms[i].formDetails!.formName);
+            setState(() {
+              PendingForms!.add(deployedForms[i].formDetails!.formName);
+            });
+            break;
           }
         }
       }
@@ -116,6 +126,7 @@ class MyHomePage extends State<MyApp> {
           IconButton(
               onPressed: () async {
                 await storage.flutterSecureStorage.deleteAll();
+                exit(0);
               },
               icon: Icon(Icons.delete_forever))
         ],

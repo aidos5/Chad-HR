@@ -720,7 +720,8 @@ class _FormBuilderState extends State<FormBuilder> {
   });
 }
 
-final sampleData2 = JsonSchema.fromJson({
+final sampleData2 = JsonSchema.fromJson(
+  {
   "form": [
     {
       "key": "informations",
