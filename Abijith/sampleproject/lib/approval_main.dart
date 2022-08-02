@@ -8,6 +8,7 @@ import 'package:sampleproject/model/UserCredentials.dart';
 import 'dart:math';
 import 'approval.dart';
 import 'employee.dart';
+//import 'dart:js';
 import 'dart:convert';
 import 'package:sampleproject/model/DeployedForm.dart';
 import 'main.dart';
@@ -22,87 +23,7 @@ class approval_m extends StatefulWidget {
 
 class _HomeState extends State<approval_m> {
   List<String> subject = [];
-  // List<String> subject = [
-  //   'Leave Approval',
-  //   'Tranfer Application',
-  //   'Salary',
-  //   'Offical Trip',
-  //   'Upcoming Event',
-  //   'Project Extension',
-  //   'Insurance',
-  //   'Employee Perks',
-  //   'Switching Shifts',
-  //   'Hiring',
-  //   'Resignation',
-  //   'Leave Approval',
-  //   'Tranfer Application',
-  //   'Salary',
-  //   'Offical Trip',
-  //   'Upcoming Event',
-  //   'Project Extension',
-  //   'Insurance',
-  //   'Employee Perks',
-  //   'Switching Shifts',
-  //   'Hiring',
-  //   'Resignation',
-  //   'Leave Approval',
-  //   'Tranfer Application',
-  //   'Salary',
-  //   'Offical Trip',
-  //   'Upcoming Event',
-  //   'Project Extension',
-  //   'Insurance',
-  //   'Employee Perks',
-  //   'Switching Shifts',
-  //   'Hiring',
-  //   'Resignation',
-  //   'Leave Approval',
-  //   'Tranfer Application',
-  //   'Salary',
-  //   'Offical Trip',
-  //   'Upcoming Event',
-  //   'Project Extension',
-  //   'Insurance',
-  //   'Employee Perks',
-  //   'Switching Shifts',
-  //   'Hiring',
-  //   'Resignation',
-  //   'Leave Approval',
-  //   'Tranfer Application',
-  //   'Salary',
-  //   'Offical Trip',
-  //   'Upcoming Event',
-  //   'Project Extension',
-  //   'Insurance',
-  //   'Employee Perks',
-  //   'Switching Shifts',
-  //   'Hiring',
-  //   'Resignation',
-  //   'Resignation',
-  //   'Leave Approval',
-  //   'Tranfer Application',
-  //   'Salary',
-  //   'Offical Trip',
-  //   'Upcoming Event',
-  //   'Project Extension',
-  //   'Insurance',
-  //   'Employee Perks',
-  //   'Switching Shifts',
-  //   'Hiring',
-  //   'Resignation',
-  //   'Resignation',
-  //   'Leave Approval',
-  //   'Tranfer Application',
-  //   'Salary',
-  //   'Offical Trip',
-  //   'Upcoming Event',
-  //   'Project Extension',
-  //   'Insurance',
-  //   'Employee Perks',
-  //   'Switching Shifts',
-  //   'Hiring',
-  //   'Resignation'
-  // ];
+
   List<DeployedForm?>? DeployedForms = [];
   List<DeployedForm?>? CompletedForms = [];
   List<String> deployedForms_string = [];
@@ -205,8 +126,12 @@ class _HomeState extends State<approval_m> {
                   itemCount: CompletedForms!.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4),
-                  itemBuilder: ((context, index) =>
-                      approval(num: index, sub: CompletedForms![index]!.formDetails!.formName!))),
+                  itemBuilder: ((context, index) => approval(
+                        num: index,
+                        sub: CompletedForms![index]!.formDetails!.formName!,
+                        from: CompletedForms![index]!.formDeployer!,
+                        deployedForm: CompletedForms![index],
+                      ))),
             ),
           ],
         ));

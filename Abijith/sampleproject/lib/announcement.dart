@@ -76,7 +76,9 @@ class _announcementState extends State<announcement> {
       body: Row(
         children: [
           SideBar(),
-          SizedBox(height: 1.1,),
+          SizedBox(
+            height: 1.1,
+          ),
           Container(
             width: screenwidth / 1.1,
             child: Column(
