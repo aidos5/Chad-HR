@@ -69,6 +69,9 @@ class MyHomePage extends State<MyApp> {
 
   Future GetDeployedForms() async {
     //Populate form builder texts list
+    setState(() {
+      deployedForms = [];
+    });
     String? jsonString = await storage.read(key: 'deployedForms');
     setState(() {
       deployedForms_string =
@@ -78,13 +81,19 @@ class MyHomePage extends State<MyApp> {
     for (String s in deployedForms_string) {
       Map<String, dynamic> data = jsonDecode(s);
 
-      deployedForms.add(DeployedForm.fromJson(data));
+      setState(() {
+        deployedForms.add(DeployedForm.fromJson(data));
+      });
     }
     //print(deployedForms_string);
     //print(deployedForms);
   }
 
   Future CheckPending() async {
+    setState(() {
+      PendingForms = [];
+    });
+
     for (int i = 0; i < deployedForms.length; i++) {
       // print('${deployedForms[i].formDetails!.processSteps![i].stepPerformers}');
       for (int j = 0;
@@ -98,16 +107,16 @@ class MyHomePage extends State<MyApp> {
             deployedForms[i].formDetails!.processSteps![j].stepCompleted ==
                 false) {
           //print('Namskara Gandu');
-          if (deployedForms[i].formDetails!.processSteps![j].stepType! ==
-                  'Input Step' ||
-              deployedForms[i].formDetails!.processSteps![j].stepType! ==
-                  'Approval Step') {
-            print('Lowde');
-            setState(() {
-              PendingForms!.add(deployedForms[i].formDetails!.formName);
-            });
-            break;
-          }
+          // if (deployedForms[i].formDetails!.processSteps![j].stepType! ==
+          //         'Input Step' ||
+          //     deployedForms[i].formDetails!.processSteps![j].stepType! ==
+          //         'Approval Step') {
+          // print('Lowde');
+          setState(() {
+            PendingForms!.add(deployedForms[i].formDetails!.formName);
+          });
+          break;
+          // }
         }
       }
     }
@@ -141,6 +150,7 @@ class MyHomePage extends State<MyApp> {
                 itemCount: PendingForms!.length,
                 itemBuilder: (context, index) => MainPageTile(
                   itemNo: index,
+                  homePage: this,
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1,
