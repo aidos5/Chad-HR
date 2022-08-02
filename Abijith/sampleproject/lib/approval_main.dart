@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+// import 'package:json_serializable/builder.dart';
 import 'package:sampleproject/SecureStorage.dart';
 import 'package:sampleproject/model/UserCredentials.dart';
 //import 'package:flutter_application_1/employee.dart';
@@ -150,7 +151,6 @@ class _HomeState extends State<approval_m> {
       if (DeployedForms![i]!.concernedUsers!.contains(currentuser!.userName) &&
           DeployedForms![i]!.formStatus == true) {
         CompletedForms!.add(DeployedForms![i]);
-        subject[i] = CompletedForms![i]!.formDetails as String;
       }
     }
   }
@@ -206,7 +206,7 @@ class _HomeState extends State<approval_m> {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4),
                   itemBuilder: ((context, index) =>
-                      approval(num: index, sub: subject[index]))),
+                      approval(num: index, sub: CompletedForms![index]!.formDetails!.formName!))),
             ),
           ],
         ));

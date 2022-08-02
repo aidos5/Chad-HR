@@ -1059,15 +1059,25 @@ class _FormsState extends State<Forms> {
                         details.processSteps![i].stepCompleted = false;
 
                         for (UserCredentials u in _selectedUsers[i]!) {
-                          if (deployedForm.concernedUsers!
-                                  .contains(u.userName) ==
-                              false) {
+                          if (deployedForm.concernedUsers != null) {
+                            if (deployedForm.concernedUsers!
+                                .contains(u.userName) == false) {
+                              deployedForm.concernedUsers!.add(u.userName);
+                            }
+                          } else {
+                            deployedForm.concernedUsers = [];
                             deployedForm.concernedUsers!.add(u.userName);
                           }
                         }
                       }
                       deployedForm.formDetails = details;
                       deployedForm.formDeployer = curUser.userName;
+                      if (deployedForm.concernedUsers != null) {
+                          if (deployedForm.concernedUsers!
+                              .contains(curUser.userName) == false) {
+                            deployedForm.concernedUsers!.add(curUser.userName);
+                          }
+                        }
                       //print(deployedForm.toJson());
 
                       deployedForms_string
