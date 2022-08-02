@@ -12,6 +12,7 @@ ProcessStep _$ProcessStepFromJson(Map<String, dynamic> json) => ProcessStep(
       stepPerformers: (json['stepPerformers'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
+      inputRecorded: json['inputRecorded'] as String?
     );
 
 Map<String, dynamic> _$ProcessStepToJson(ProcessStep instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$ProcessStepToJson(ProcessStep instance) =>
       'stepType': instance.stepType,
       'stepPerformers': instance.stepPerformers,
       'stepCompleted': instance.stepCompleted,
+      'inputRecorded': instance.inputRecorded
     };
