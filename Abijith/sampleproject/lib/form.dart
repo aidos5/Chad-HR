@@ -1063,7 +1063,7 @@ class _FormsState extends State<Forms> {
                           value: jsonEncode(deployedForms_string));
 
                       String? s = await storage.read(key: 'deployedForms');
-                      print(s);
+                      //print(s);
 
                       // Close dialog
                       Navigator.pop(context);

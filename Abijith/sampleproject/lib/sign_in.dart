@@ -177,10 +177,7 @@ class _HomeState extends State<Home> {
                       //print(s);
 
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => MyHomePage(
-                                    title: 'Chad HR',
-                                  )),
+                          MaterialPageRoute(builder: (context) => MyApp()),
                           (route) => false);
                     },
                     child: Text('Login',

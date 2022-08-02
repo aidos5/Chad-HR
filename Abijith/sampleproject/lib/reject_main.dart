@@ -218,7 +218,7 @@ class _HomeState extends State<reject_m> {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return MyHomePage(title: 'CHAD HR');
+                        return MyApp();
                       });
                 },
               ),

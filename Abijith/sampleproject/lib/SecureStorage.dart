@@ -39,8 +39,10 @@ class SecureStorage {
           int.parse(await flutterSecureStorage.read(key: chunkedKey) ?? '0');
 
       if (chunkSize > 0) {
-        final chunks = await Future.wait(List.generate(chunkSize,
-            (i) async => await flutterSecureStorage.read(key: '${key}_$i')));
+        final chunks = await Future.wait(List.generate(
+            chunkSize,
+            (i) async =>
+                await flutterSecureStorage.read(key: '${key}_${i + 1}')));
         return chunks.join();
       } else {
         return await flutterSecureStorage.read(key: key);

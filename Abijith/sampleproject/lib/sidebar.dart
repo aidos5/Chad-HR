@@ -25,9 +25,8 @@ class SideBar extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MyHomePage(
-                                title: 'Chad HR',
-                              )));
+                        builder: (context) => MyApp(),
+                      ));
                 },
                 child: Icon(
                   Icons.home,

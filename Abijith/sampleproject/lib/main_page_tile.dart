@@ -1,6 +1,7 @@
 import 'dart:io';
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:sampleproject/SecureStorage.dart';
 import 'package:sampleproject/model/DeployedForm.dart';
 import 'package:sampleproject/sidebar.dart';
 
@@ -18,10 +19,10 @@ import 'package:sampleproject/model/UserCredentials.dart';
 import 'package:sampleproject/model/UserCredentials.dart';
 
 class MainPageTile extends StatefulWidget {
-  MainPageTile({Key? key}) : super(key: key);
-  int? itemNo;
-  MainPageTile.withItemNo(
-    this.itemNo,
+  MainPageTile({Key? key, required this.itemNo}) : super(key: key);
+  final int itemNo;
+  MainPageTile.withitemNo(
+    final this.itemNo,
   );
 
   @override
@@ -29,33 +30,38 @@ class MainPageTile extends StatefulWidget {
 }
 
 class _MainPageTileState extends State<MainPageTile> {
-  int? itemNo;
-  final storage = new FlutterSecureStorage();
+  final storage = new SecureStorage(FlutterSecureStorage());
   List<String> usercreds_string = [];
   List<String> deployedForms_string = [];
-  List<DeployedForm?>? ApprovedForms = [];
-  List<DeployedForm?>? InputForms = [];
+  List<String?>? PendingForms = [];
+  List<String?>? CheckStep = [];
+  //List<DeployedForm?>? InputForms = [];
 
   List<DeployedForm> deployedForms = [];
   UserCredentials? currentuser;
 
   _MainPageTileState(this.itemNo);
+  final int itemNo;
 
   @override
   void initState() {
-    CurrentUser();
-    GetDeployedForms();
-    CheckPending();
+    DoStuff();
     super.initState();
   }
 
-  void CurrentUser() async {
+  void DoStuff() async {
+    await CurrentUser();
+    await GetDeployedForms();
+    await CheckPending();
+  }
+
+  Future CurrentUser() async {
     String? usercreds = await storage.read(key: 'currentUser');
 
     currentuser = UserCredentials.fromJson(jsonDecode(usercreds ?? ""));
   }
 
-  void GetDeployedForms() async {
+  Future GetDeployedForms() async {
     //Populate form builder texts list
     String? jsonString = await storage.read(key: 'deployedForms');
     setState(() {
@@ -68,33 +74,35 @@ class _MainPageTileState extends State<MainPageTile> {
 
       deployedForms.add(DeployedForm.fromJson(data));
     }
+    //print(deployedForms_string);
+    //print(deployedForms);
   }
 
-  void CheckPending() {
-    print(deployedForms);
+  Future CheckPending() async {
     for (int i = 0; i < deployedForms.length; i++) {
-      print('${deployedForms[i].formDetails!.processSteps![i].stepPerformers}');
-      if (deployedForms[i].formDetails!.processSteps![i].stepPerformers! ==
-          currentuser)
-        //     (currentuser) &&
-        // deployedForms[i].formDetails!.processSteps![i].stepCompleted ==
-        //     false) {
-        print('Namskara Gandu');
-      if (deployedForms[i].formDetails!.processSteps![i].stepType! ==
-          ('Input Step')) {
-        InputForms!.add(deployedForms[i]);
+      // print('${deployedForms[i].formDetails!.processSteps![i].stepPerformers}');
+      for (int j = 0;
+          j < deployedForms[i].formDetails!.processSteps!.length;
+          j++) {
+        if (deployedForms[i]
+                .formDetails!
+                .processSteps![j]
+                .stepPerformers!
+                .contains(currentuser!.userName) &&
+            deployedForms[i].formDetails!.processSteps![j].stepCompleted ==
+                false) {
+          //print('Namskara Gandu');
+          if (deployedForms[i].formDetails!.processSteps![j].stepType! ==
+                  'Input Step' ||
+              deployedForms[i].formDetails!.processSteps![j].stepType! ==
+                  'Approval Step') {
+            //print('Lowde');
+            PendingForms!.add(deployedForms[i].formDetails!.formName);
+            CheckStep!
+                .add(deployedForms[i].formDetails!.processSteps![j].stepType);
+          }
+        }
       }
-      if (deployedForms[i].formDetails!.processSteps![i].stepType! ==
-          ('Approval Step')) {
-        ApprovedForms!.add(deployedForms[i]);
-      }
-    }
-
-    for (int i = 0; i < ApprovedForms!.length; i++) {
-      print(ApprovedForms![i]!.formDetails);
-    }
-    for (int i = 0; i < InputForms!.length; i++) {
-      print(InputForms![i]!.formDetails);
     }
   }
 
@@ -115,28 +123,46 @@ class _MainPageTileState extends State<MainPageTile> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(
-                  'Pending',
-                  style: TextStyle(color: Colors.amber),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(
-                  '',
-                  //(DisplayApprovedForms() as String),
-                  style: TextStyle(color: Colors.amber),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(
-                  '',
-                  //(DisplayInputForms() as String),
-                  style: TextStyle(color: Colors.amber),
-                ),
+              Column(
+                children: [
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        '${PendingForms![itemNo]}',
+
+                        // Add Form Details
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(185, 0, 0, 0),
+                            decoration: TextDecoration.underline),
+                      ),
+                    ),
+                  ),
+                  if (CheckStep![itemNo] == 'Input Step')
+                    MaterialButton(
+                      color: Colors.red,
+                      onPressed: () {},
+                      child: const Text(
+                        'Input',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  if (CheckStep![itemNo] == 'Approval Step')
+                    MaterialButton(
+                      color: Colors.red,
+                      onPressed: () {},
+                      child: const Text(
+                        'Approve',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ],
           ),
@@ -151,16 +177,4 @@ class _MainPageTileState extends State<MainPageTile> {
       ),
     );
   }
-
-  // String? DisplayApprovedForms() {
-  //   return ApprovedForms![0]!.formDetails!.formName as String;
-  // }
-
-  // String? DisplayInputForms() {
-  //   return InputForms![0]!.formDetails!.formName as String;
-  // }
 }
-
-
-// ignore: must_be_immutable
-

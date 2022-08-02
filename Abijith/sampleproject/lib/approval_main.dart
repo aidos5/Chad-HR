@@ -124,7 +124,7 @@ class _HomeState extends State<approval_m> {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return MyHomePage(title: 'CHAD HR');
+                          return MyApp();
                         });
                   },
                 ),
