@@ -27,7 +27,7 @@ class EmployeePerks extends StatelessWidget {
           Container(
               width: screenwidth / 1.1,
               child: GridView.builder(
-                itemCount: 20,
+                itemCount: 9,
                 itemBuilder: (context, index) => EmployeeTiles(index),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,

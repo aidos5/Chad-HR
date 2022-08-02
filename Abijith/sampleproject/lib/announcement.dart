@@ -10,6 +10,7 @@ import 'dart:math';
 import 'announcement_box.dart';
 //import 'rolessave.dart';
 import 'main.dart';
+import 'model/UserCredentials.dart';
 import 'sidebar.dart';
 
 class announcement extends StatefulWidget {
@@ -24,7 +25,7 @@ class _announcementState extends State<announcement> {
 
   List<Announcement>? announcements = [];
   List<String>? announcements_string = [];
-
+  UserCredentials? currentuser;
   @override
   void initState() {
     DoStuff();
@@ -33,6 +34,7 @@ class _announcementState extends State<announcement> {
   }
 
   Future DoStuff() async {
+    await CurrentUser();
     await GetAnnouncements();
   }
 
@@ -53,6 +55,12 @@ class _announcementState extends State<announcement> {
         announcements!.add(Announcement.fromJson(data));
       });
     }
+  }
+
+  Future CurrentUser() async {
+    String? usercreds = await storage.read(key: 'currentUser');
+
+    currentuser = UserCredentials.fromJson(jsonDecode(usercreds ?? ""));
   }
 
   @override
@@ -127,13 +135,14 @@ class _announcementState extends State<announcement> {
               ],
             ),
           ),
+          if (currentuser?.userRole == 'HR' || currentuser?.userRole! == 'Boss')
+            FloatingActionButton(
+              onPressed: () {
+                announcement_dialog(context, this);
+              },
+              child: Icon(Icons.add),
+            ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          announcement_dialog(context, this);
-        },
-        child: Icon(Icons.add),
       ),
     );
   }
