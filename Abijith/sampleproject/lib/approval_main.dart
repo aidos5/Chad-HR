@@ -146,18 +146,11 @@ class _HomeState extends State<approval_m> {
   Completedcheck() {
     for (int i = 0; i < DeployedForms!.length; i++) {
       // print('${deployedForms[i].formDetails!.processSteps![i].stepPerformers}');
-      for (int j = 0;
-          j < DeployedForms![i]!.formDetails!.processSteps!.length;
-          j++) {
-        if (DeployedForms![i]!
-                .formDetails!
-                .processSteps![j]
-                .stepPerformers!
-                .contains(currentuser!.userName) &&
-            DeployedForms![i]!.formStatus == true) {
-          CompletedForms!.add(DeployedForms![i]);
-          subject[i] = CompletedForms![i]!.formDetails!.formJSON ?? "";
-        }
+
+      if (DeployedForms![i]!.concernedUsers!.contains(currentuser!.userName) &&
+          DeployedForms![i]!.formStatus == true) {
+        CompletedForms!.add(DeployedForms![i]);
+        subject[i] = CompletedForms![i]!.formDetails as String;
       }
     }
   }
