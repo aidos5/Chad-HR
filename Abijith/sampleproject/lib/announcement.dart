@@ -1,40 +1,59 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:sampleproject/SecureStorage.dart';
+import 'package:sampleproject/model/Announcement.dart';
 import 'dart:math';
 import 'announcement_box.dart';
 //import 'rolessave.dart';
 import 'main.dart';
+import 'sidebar.dart';
 
-String dropdownValue = 'HR';
+class announcement extends StatefulWidget {
+  announcement({Key? key}) : super(key: key);
 
-List<String> Roles = ['HR', 'Manager', 'Boss', 'CEO', 'Employee'];
-String Title = '';
-String Subject = '';
+  @override
+  State<announcement> createState() => _announcementState();
+}
 
-class announcement extends StatelessWidget {
-  List<String> Box = [
-    'one',
-    'two',
-    'three',
-    'four',
-    'five',
-    'six',
-    'seven',
-    'eight',
-    'nine',
-    'ten',
-    'eleven',
-    'twelve',
-    'thirteen',
-    'fourteen',
-    'fifteen',
-    'sixteen',
-    'seventeen',
-    'eighteen',
-    'nineteen',
-    'twenty'
-  ];
+class _announcementState extends State<announcement> {
+  final storage = SecureStorage(FlutterSecureStorage());
+
+  List<Announcement>? announcements = [];
+  List<String>? announcements_string = [];
+
+  @override
+  void initState() {
+    DoStuff();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  Future DoStuff() async {
+    await GetAnnouncements();
+  }
+
+  Future GetAnnouncements() async {
+    setState(() {
+      announcements_string = [];
+      announcements = [];
+    });
+
+    String? annStr = await storage.read(key: 'announcements');
+    announcements_string =
+        (jsonDecode(annStr!) as List<dynamic>).cast<String>();
+
+    for (String s in announcements_string!) {
+      Map<String, dynamic> data = jsonDecode(s);
+
+      setState(() {
+        announcements!.add(Announcement.fromJson(data));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,162 +73,158 @@ class announcement extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 7, 68, 133),
         centerTitle: true,
       ),
-      body: Column(
+      body: Row(
         children: [
-          SizedBox(height: 10),
-          Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return MyApp();
-                      });
-                },
-              ),
-              SizedBox(
-                width: screenwidth / 2.4,
-              ),
-              Text(
-                'ANNOUNCEMENTS',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Color.fromARGB(185, 0, 0, 0),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Expanded(
-            child: ListView.builder(
-              itemCount: Box.length,
-              itemBuilder: ((context, index) {
-                return Column(
+          SideBar(),
+          SizedBox(height: 1.1,),
+          Container(
+            width: screenwidth / 1.1,
+            child: Column(
+              children: [
+                SizedBox(height: 10),
+                Row(
                   children: [
-                    //Text('ANNOUNCEMENTS'),
-                    Boxer(child: Box[index]),
+                    // IconButton(
+                    //   icon: const Icon(Icons.arrow_back),
+                    //   onPressed: () {
+                    //     showDialog(
+                    //         context: context,
+                    //         builder: (context) {
+                    //           return MyApp();
+                    //         });
+                    //   },
+                    // ),
+                    SizedBox(
+                      width: screenwidth / 2.4,
+                    ),
+                    Text(
+                      'ANNOUNCEMENTS',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(185, 0, 0, 0),
+                      ),
+                    ),
                   ],
-                );
-              }),
+                ),
+                SizedBox(height: 10),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: announcements!.length,
+                    itemBuilder: ((context, index) {
+                      return Column(
+                        children: [
+                          //Text('ANNOUNCEMENTS'),
+                          Boxer(announcements![index].title,
+                              announcements![index].description),
+                        ],
+                      );
+                    }),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          announcement_dialog(context);
+          announcement_dialog(context, this);
         },
         child: Icon(Icons.add),
       ),
     );
   }
-}
 
-announcement_dialog(BuildContext context) {
-  showDialog(
-      context: context,
-      builder: (context) => StatefulBuilder(builder: (context, setState) {
-            return Dialog(
-              child: Container(
-                width: 1000,
-                height: 700,
-                color: Colors.amber,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Whom To',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        DropdownButton<String>(
-                          value: dropdownValue,
-                          icon: const Icon(Icons.arrow_downward),
-                          elevation: 16,
-                          style: const TextStyle(color: Colors.deepPurple),
-                          underline: Container(
-                            height: 2,
-                            color: Colors.deepPurpleAccent,
-                          ),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              dropdownValue = newValue!;
-                            });
-                          },
-                          items: Roles.map<DropdownMenuItem<String>>(
-                              (String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 100,
-                      child: Padding(
-                        padding: const EdgeInsets.all(25),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ), // BoxDecoration
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Announcement Title',
+  announcement_dialog(BuildContext context, _announcementState state) {
+    TextEditingController titleCont = new TextEditingController();
+    TextEditingController descriptionCont = new TextEditingController();
+
+    showDialog(
+        context: context,
+        builder: (context) => StatefulBuilder(builder: (context, setState) {
+              return Dialog(
+                child: Container(
+                  width: 1000,
+                  height: 700,
+                  color: Colors.amber,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 100,
+                        child: Padding(
+                          padding: const EdgeInsets.all(25),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(12),
+                            ), // BoxDecoration
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: TextField(
+                                controller: titleCont,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Announcement Title',
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Container(
-                      height: 350,
-                      child: Padding(
-                        padding: const EdgeInsets.all(25),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
-                          ), // BoxDecoration
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Subject',
+                      Container(
+                        height: 350,
+                        child: Padding(
+                          padding: const EdgeInsets.all(25),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(12),
+                            ), // BoxDecoration
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: TextField(
+                                keyboardType: TextInputType.multiline,
+                                maxLines: 20,
+                                controller: descriptionCont,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Subject',
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    MaterialButton(
-                      color: Colors.blue,
-                      onPressed: () {},
-                      child: Text('Submit',
-                          style: TextStyle(
-                            color: Colors.white,
-                          )),
-                    ),
-                  ],
+                      MaterialButton(
+                        color: Colors.blue,
+                        onPressed: () async {
+                          // Save it into a json
+                          Announcement an = Announcement();
+                          an.title = titleCont.text;
+                          an.description = descriptionCont.text;
+
+                          announcements_string!.add(jsonEncode(an.toJson()));
+
+                          await storage.write(
+                              key: 'announcements',
+                              value: jsonEncode(announcements_string));
+
+                          await state.DoStuff();
+
+                          Navigator.pop(context);
+                        },
+                        child: Text('Submit',
+                            style: TextStyle(
+                              color: Colors.white,
+                            )),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }));
+              );
+            }));
+  }
 }

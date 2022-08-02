@@ -13,8 +13,8 @@ DeployedForm _$DeployedFormFromJson(Map<String, dynamic> json) => DeployedForm()
   ..formStatus = json['formStatus'] as bool?
   ..formClarification = json['formClarification'] as String?
   ..concernedUsers = (json['concernedUsers'] as List<dynamic>?)
-          ?.map((e) => e as String?)
-          .toList()
+      ?.map((e) => e as String?)
+      .toList()
   ..formDeployer = json['formDeployer'] as String?;
 
 Map<String, dynamic> _$DeployedFormToJson(DeployedForm instance) =>
@@ -22,6 +22,6 @@ Map<String, dynamic> _$DeployedFormToJson(DeployedForm instance) =>
       'formDetails': instance.formDetails?.toJson(),
       'formStatus': instance.formStatus,
       'formClarification': instance.formClarification,
-      'concernedUsers':instance.concernedUsers,
-      'formDeployer':instance.formDeployer
+      'concernedUsers': instance.concernedUsers,
+      'formDeployer': instance.formDeployer,
     };
