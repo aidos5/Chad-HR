@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sampleproject/sidebar.dart';
 import 'main_page_tile.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  MainPage({Key? key}) : super(key: key);
+
+  int? itemNo;
+  MainPage.withItemNo(this.itemNo);
+
+  @override
+  State<MainPage> createState() => _MainPageState(itemNo!);
+}
+
+class _MainPageState extends State<MainPage> {
   final int itemNo;
 
-  const MainPage(
-    this.itemNo,
-  );
+  _MainPageState(this.itemNo);
+
+  final storage = FlutterSecureStorage();
+
+  // MainPage(
+  //   this.itemNo,
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +33,13 @@ class MainPage extends StatelessWidget {
         centerTitle: true,
         title: Text(title),
         automaticallyImplyLeading: true,
+        actions: [
+          IconButton(
+              onPressed: () async {
+                await storage.deleteAll();
+              },
+              icon: Icon(Icons.directions_transit_filled))
+        ],
       ),
       body: Row(
         children: [

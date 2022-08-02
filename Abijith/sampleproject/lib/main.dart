@@ -6,6 +6,7 @@ import 'profile.dart';
 import 'employee_perks.dart';
 import 'form.dart';
 import 'userprofile.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() =>
     runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Home(),
     );
@@ -23,7 +25,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
+  MyHomePage({super.key, required this.title});
+
+  final storage = FlutterSecureStorage();
 
   final String title;
 
@@ -34,6 +38,13 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(title),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                await storage.deleteAll();
+              },
+              icon: Icon(Icons.delete_forever))
+        ],
       ),
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
