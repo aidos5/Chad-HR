@@ -125,7 +125,7 @@ class MyHomePage extends State<MyApp> {
         children: [
           SideBar(),
           Container(
-              width: screenwidth / 1.1,
+              width: screenwidth / 2,
               child: GridView.builder(
                 itemCount: PendingForms!.length,
                 itemBuilder: (context, index) => MainPageTile(
@@ -133,11 +133,14 @@ class MyHomePage extends State<MyApp> {
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1,
-                  childAspectRatio: 5,
-                  mainAxisSpacing: 50,
-                  crossAxisSpacing: 20,
+                  childAspectRatio: 3,
+                  // mainAxisSpacing: 50,
+                  // crossAxisSpacing: 20,
                 ),
               )),
+          SizedBox(
+            width: screenwidth / 2.6,
+          ),
           IconButton(
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(

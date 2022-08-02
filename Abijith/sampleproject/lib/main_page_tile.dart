@@ -121,26 +121,31 @@ class _MainPageTileState extends State<MainPageTile> {
       child: Column(
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        '${PendingForms![itemNo]}',
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    '${PendingForms![itemNo]}',
 
-                        // Add Form Details
-                        style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(185, 0, 0, 0),
-                            decoration: TextDecoration.underline),
-                      ),
-                    ),
+                    // Add Form Details
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(185, 0, 0, 0),
+                        decoration: TextDecoration.underline),
                   ),
-                  if (CheckStep![itemNo] == 'Input Step')
+                ),
+              ),
+              if (CheckStep![itemNo] == 'Input Step')
+                SizedBox(
+                  height: screenheight / 7.3,
+                ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
                     MaterialButton(
                       color: Colors.red,
                       onPressed: () {},
@@ -151,30 +156,31 @@ class _MainPageTileState extends State<MainPageTile> {
                         ),
                       ),
                     ),
-                  if (CheckStep![itemNo] == 'Approval Step')
-                    MaterialButton(
-                      color: Colors.red,
-                      onPressed: () {},
-                      child: const Text(
-                        'Approve',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                ],
+                  ],
+                ),
               ),
+              if (CheckStep![itemNo] == 'Approval Step')
+                MaterialButton(
+                  color: Colors.red,
+                  onPressed: () {},
+                  child: const Text(
+                    'Approve',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
             ],
           ),
-          // Expanded(
-          //   child: ListTile(
-          //     tileColor: Colors.blue,
-          //     onTap: () {},
-          //     hoverColor: Colors.orange,
-          //   ),
-          // ),
         ],
       ),
+      // Expanded(
+      //   child: ListTile(
+      //     tileColor: Colors.blue,
+      //     onTap: () {},
+      //     hoverColor: Colors.orange,
+      //   ),
+      // ),
     );
   }
 }
