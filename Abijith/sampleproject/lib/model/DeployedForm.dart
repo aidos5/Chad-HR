@@ -1,3 +1,4 @@
+import 'package:json_serializable/json_serializable.dart';
 import 'package:sampleproject/model/UserCredentials.dart';
 
 // import 'package:json_annotation/json_annotation.dart';
@@ -12,6 +13,8 @@ class DeployedForm {
   FormDetails? formDetails;
   bool? formStatus;
   String? formClarification;
+  List<String?>? concernedUsers;
+  String? formDeployer;
 
   DeployedForm();
 

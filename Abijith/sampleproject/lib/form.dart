@@ -1043,6 +1043,13 @@ class _FormsState extends State<Forms> {
                       // _selectedUsers.removeWhere(
                       //     (key, value) => key == null || value == null);
                       DeployedForm deployedForm = DeployedForm();
+
+                      String? curUserStr =
+                          await storage.read(key: 'currentUser');
+
+                      UserCredentials curUser = UserCredentials.fromJson(
+                          jsonDecode(curUserStr ?? ""));
+
                       for (int i = 0; i < _selectedUsers.length; i++) {
                         // print(_selectedUsers[i] != null);
                         details.processSteps![i].stepPerformers =
@@ -1050,8 +1057,17 @@ class _FormsState extends State<Forms> {
                                 .map((e) => e.userName)
                                 .toList();
                         details.processSteps![i].stepCompleted = false;
+
+                        for (UserCredentials u in _selectedUsers[i]!) {
+                          if (deployedForm.concernedUsers!
+                                  .contains(u.userName) ==
+                              false) {
+                            deployedForm.concernedUsers!.add(u.userName);
+                          }
+                        }
                       }
                       deployedForm.formDetails = details;
+                      deployedForm.formDeployer = curUser.userName;
                       //print(deployedForm.toJson());
 
                       deployedForms_string
