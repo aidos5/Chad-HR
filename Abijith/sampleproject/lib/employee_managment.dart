@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:sampleproject/SecureStorage.dart';
 import 'package:sampleproject/model/GiveBadgeContract.dart';
@@ -7,6 +6,7 @@ import 'package:sampleproject/model/GiveBadgeContract.dart';
 import 'dart:math';
 import 'package:sampleproject/model/UserCredentials.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:sampleproject/sidebar.dart';
 
 import 'employee.dart';
 import 'dart:convert';
@@ -66,27 +66,36 @@ class _employee_mState extends State<employee_m> {
         backgroundColor: Color.fromARGB(255, 7, 68, 133),
         centerTitle: true,
       ),
-      body: Column(
+      body: Row(
         children: [
-          SizedBox(height: 20),
-          Center(
-              child: Text(
-            'EMPLOYEE MANAGEMENT SYSTEM',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Color.fromARGB(185, 0, 0, 0),
-              decoration: TextDecoration.underline,
-            ),
-          )),
-          SizedBox(height: 20),
-          Expanded(
-            child: GridView.builder(
-              itemBuilder: ((context, index) =>
-                  Empl.withName(name: userCreds[index].userName ?? "Lowde", giveBadgeContract: badgeInterface,)),
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-              itemCount: userCreds.length,
+          SideBar(),
+          SizedBox(height: 1.1,),
+          Container(
+            width: MediaQuery.of(context).size.width / 1.1,            
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                Center(
+                    child: Text(
+                  'EMPLOYEE MANAGEMENT SYSTEM',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromARGB(185, 0, 0, 0),
+                    decoration: TextDecoration.underline,
+                  ),
+                )),
+                SizedBox(height: 20),
+                Flexible(
+                  child: GridView.builder(
+                    itemBuilder: ((context, index) =>
+                        Empl.withName(name: userCreds[index].userName ?? "Lowde", giveBadgeContract: badgeInterface,)),
+                    gridDelegate:
+                        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+                    itemCount: userCreds.length,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

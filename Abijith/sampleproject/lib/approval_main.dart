@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:json_serializable/builder.dart';
 import 'package:sampleproject/SecureStorage.dart';
 import 'package:sampleproject/model/UserCredentials.dart';
+import 'package:sampleproject/sidebar.dart';
 //import 'package:flutter_application_1/employee.dart';
 import 'dart:math';
 import 'approval.dart';
@@ -94,44 +95,53 @@ class _HomeState extends State<approval_m> {
           backgroundColor: Color.fromARGB(255, 7, 68, 133),
           centerTitle: true,
         ),
-        body: Column(
+        body: Row(
           children: [
-            SizedBox(height: 5),
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return MyApp();
-                        });
-                  },
-                ),
-                SizedBox(width: screenwidth / 2.55),
-                Text(
-                  'APPROVAL FORMS',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    color: Color.fromARGB(185, 0, 0, 0),
-                    decoration: TextDecoration.underline,
+            SideBar(),
+
+            Container(
+              width: screenwidth / 1.1,
+              child: Column(
+                children: [
+                  SizedBox(height: 5),
+                  Row(
+                    children: [
+                      // IconButton(
+                      //   icon: const Icon(Icons.arrow_back),
+                      //   onPressed: () {
+                      //     showDialog(
+                      //         context: context,
+                      //         builder: (context) {
+                      //           return MyApp();
+                      //         });
+                      //   },
+                      // ),
+                      SizedBox(width: screenwidth / 2.55),
+                      Text(
+                        'APPROVAL FORMS',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: Color.fromARGB(185, 0, 0, 0),
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: GridView.builder(
-                  itemCount: CompletedForms!.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4),
-                  itemBuilder: ((context, index) => approval(
-                        num: index,
-                        sub: CompletedForms![index]!.formDetails!.formName!,
-                        from: CompletedForms![index]!.formDeployer!,
-                        deployedForm: CompletedForms![index],
-                      ))),
+                  Flexible(
+                    child: GridView.builder(
+                        itemCount: CompletedForms!.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4),
+                        itemBuilder: ((context, index) => approval(
+                              num: index,
+                              sub: CompletedForms![index]!.formDetails!.formName!,
+                              from: CompletedForms![index]!.formDeployer!,
+                              deployedForm: CompletedForms![index],
+                            ))),
+                  ),
+                ],
+              ),
             ),
           ],
         ));
