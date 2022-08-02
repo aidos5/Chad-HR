@@ -25,9 +25,8 @@ class SideBar extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MyHomePage(
-                                title: 'Chad HR',
-                              )));
+                        builder: (context) => MyApp(),
+                      ));
                 },
                 child: Icon(
                   Icons.home,
@@ -56,7 +55,7 @@ class SideBar extends StatelessWidget {
             child: RaisedButton(
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => reject_m()),
+                      MaterialPageRoute(builder: (context) => Forms()),
                       (route) => false);
 
                   // Navigator.push(

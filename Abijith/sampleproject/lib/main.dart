@@ -2,33 +2,109 @@ import 'package:flutter/material.dart';
 import 'package:sampleproject/main_page_tile.dart';
 import 'package:sampleproject/sign_in.dart';
 import 'sidebar.dart';
-import 'profile.dart';
-import 'employee_perks.dart';
-import 'form.dart';
+// ignore_for_file: prefer_const_constructors
+import 'package:flutter/material.dart';
+import 'package:sampleproject/SecureStorage.dart';
+import 'package:sampleproject/model/DeployedForm.dart';
+import 'package:sampleproject/sidebar.dart';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'dart:convert';
+
+import 'package:sampleproject/model/UserCredentials.dart';
 import 'userprofile.dart';
 
 void main() =>
-    runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
+    runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Home()));
 
-class MyApp extends StatelessWidget {
-  static const appTitle = 'Chad HR';
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+  String? title;
+  MyApp.withTitle(
+    this.title,
+  );
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: appTitle,
-      home: Home(),
-    );
-  }
+  State<MyApp> createState() => MyHomePage();
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
+class MyHomePage extends State<MyApp> {
+  final storage = new SecureStorage(FlutterSecureStorage());
+  List<String> usercreds_string = [];
+  List<String> deployedForms_string = [];
+  List<String?>? PendingForms = [];
+  //List<String?>? CheckStep = [];
+  //List<DeployedForm?>? InputForms = [];
 
-  final String title;
+  List<DeployedForm> deployedForms = [];
+  UserCredentials? currentuser;
+
+  @override
+  void initState() {
+    DoStuff();
+    super.initState();
+  }
+
+  void DoStuff() async {
+    await CurrentUser();
+    await GetDeployedForms();
+    await CheckPending();
+  }
+
+  Future CurrentUser() async {
+    String? usercreds = await storage.read(key: 'currentUser');
+
+    currentuser = UserCredentials.fromJson(jsonDecode(usercreds ?? ""));
+  }
+
+  Future GetDeployedForms() async {
+    //Populate form builder texts list
+    String? jsonString = await storage.read(key: 'deployedForms');
+    setState(() {
+      deployedForms_string =
+          (jsonDecode(jsonString ?? "") as List<dynamic>).cast<String>();
+    });
+
+    for (String s in deployedForms_string) {
+      Map<String, dynamic> data = jsonDecode(s);
+
+      deployedForms.add(DeployedForm.fromJson(data));
+    }
+    //print(deployedForms_string);
+    //print(deployedForms);
+  }
+
+  Future CheckPending() async {
+    for (int i = 0; i < deployedForms.length; i++) {
+      // print('${deployedForms[i].formDetails!.processSteps![i].stepPerformers}');
+      for (int j = 0;
+          j < deployedForms[i].formDetails!.processSteps!.length;
+          j++) {
+        if (deployedForms[i]
+                .formDetails!
+                .processSteps![j]
+                .stepPerformers!
+                .contains(currentuser!.userName) &&
+            deployedForms[i].formDetails!.processSteps![j].stepCompleted ==
+                false) {
+          //print('Namskara Gandu');
+          if (deployedForms[i].formDetails!.processSteps![j].stepType! ==
+                  'Input Step' ||
+              deployedForms[i].formDetails!.processSteps![j].stepType! ==
+                  'Approval Step') {
+            print('Lowde');
+            PendingForms!.add(deployedForms[i].formDetails!.formName);
+          }
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    String? title = 'Chad HR';
+
     double screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -42,8 +118,10 @@ class MyHomePage extends StatelessWidget {
           Container(
               width: screenwidth / 1.1,
               child: GridView.builder(
-                itemCount: 1,
-                itemBuilder: (context, index) => MainPageTile(),
+                itemCount: PendingForms!.length,
+                itemBuilder: (context, index) => MainPageTile(
+                  itemNo: index,
+                ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1,
                   childAspectRatio: 5,

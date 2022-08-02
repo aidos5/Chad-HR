@@ -90,6 +90,5 @@ class pro extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }

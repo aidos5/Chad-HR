@@ -6,7 +6,6 @@ import 'announcement_box.dart';
 import 'rolessave.dart';
 import 'main.dart';
 
-
 String dropdownValue = 'HR';
 
 List<String> Roles = ['HR', 'Manager', 'Boss', 'CEO', 'Employee'];
@@ -66,7 +65,7 @@ class announcement extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return MyHomePage(title: 'CHAD HR');
+                        return MyApp();
                       });
                 },
               ),
