@@ -43,6 +43,7 @@ class _FormsState extends State<Forms> {
   final storage = SecureStorage(FlutterSecureStorage());
 
   List<UserCredentials> userCreds = [];
+  UserCredentials? currentuser;
   Map<int, List<UserCredentials>> _selectedUsers = {};
 
   int _cardCount = 0;
@@ -96,6 +97,10 @@ class _FormsState extends State<Forms> {
       UserCredentials creds = UserCredentials.fromJson(data);
 
       userCreds.add(creds);
+
+      String? usercreds = await storage.read(key: 'currentUser');
+
+      currentuser = UserCredentials.fromJson(jsonDecode(usercreds ?? ""));
     }
   }
 
@@ -183,21 +188,23 @@ class _FormsState extends State<Forms> {
                   crossAxisSpacing: 20,
                 ),
               )),
-          Expanded(
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: FloatingActionButton(
-                  onPressed: () {
-                    // Open FOrm dialog
-                    OpenFormCreator(context);
-                  },
-                  child: Icon(Icons.add),
+          if (currentuser!.userPassword == 'HR' ||
+              currentuser!.userPassword == 'Boss')
+            Expanded(
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      // Open FOrm dialog
+                      OpenFormCreator(context);
+                    },
+                    child: Icon(Icons.add),
+                  ),
                 ),
               ),
-            ),
-          )
+            )
         ],
       ),
     );
@@ -1061,7 +1068,8 @@ class _FormsState extends State<Forms> {
                         for (UserCredentials u in _selectedUsers[i]!) {
                           if (deployedForm.concernedUsers != null) {
                             if (deployedForm.concernedUsers!
-                                .contains(u.userName) == false) {
+                                    .contains(u.userName) ==
+                                false) {
                               deployedForm.concernedUsers!.add(u.userName);
                             }
                           } else {
@@ -1073,11 +1081,12 @@ class _FormsState extends State<Forms> {
                       deployedForm.formDetails = details;
                       deployedForm.formDeployer = curUser.userName;
                       if (deployedForm.concernedUsers != null) {
-                          if (deployedForm.concernedUsers!
-                              .contains(curUser.userName) == false) {
-                            deployedForm.concernedUsers!.add(curUser.userName);
-                          }
+                        if (deployedForm.concernedUsers!
+                                .contains(curUser.userName) ==
+                            false) {
+                          deployedForm.concernedUsers!.add(curUser.userName);
                         }
+                      }
                       //print(deployedForm.toJson());
 
                       deployedForms_string

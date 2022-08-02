@@ -136,11 +136,14 @@ class _announcementState extends State<announcement> {
             ),
           ),
           if (currentuser?.userRole == 'HR' || currentuser?.userRole! == 'Boss')
-            FloatingActionButton(
-              onPressed: () {
-                announcement_dialog(context, this);
-              },
-              child: Icon(Icons.add),
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: FloatingActionButton(
+                onPressed: () {
+                  announcement_dialog(context, this);
+                },
+                child: Icon(Icons.add),
+              ),
             ),
         ],
       ),
