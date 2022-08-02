@@ -1,11 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:sampleproject/SecureStorage.dart';
+import 'package:sampleproject/model/UserCredentials.dart';
 //import 'package:flutter_application_1/employee.dart';
 import 'dart:math';
 import 'approval.dart';
 import 'employee.dart';
+import 'dart:convert';
+import 'package:sampleproject/model/DeployedForm.dart';
 import 'main.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import 'package:json_dynamic_form/JsonDynamicForm.dart';
 
 class approval_m extends StatefulWidget {
   @override
@@ -13,87 +20,147 @@ class approval_m extends StatefulWidget {
 }
 
 class _HomeState extends State<approval_m> {
-  List<String> subject = [
-    'Leave Approval',
-    'Tranfer Application',
-    'Salary',
-    'Offical Trip',
-    'Upcoming Event',
-    'Project Extension',
-    'Insurance',
-    'Employee Perks',
-    'Switching Shifts',
-    'Hiring',
-    'Resignation',
-    'Leave Approval',
-    'Tranfer Application',
-    'Salary',
-    'Offical Trip',
-    'Upcoming Event',
-    'Project Extension',
-    'Insurance',
-    'Employee Perks',
-    'Switching Shifts',
-    'Hiring',
-    'Resignation',
-    'Leave Approval',
-    'Tranfer Application',
-    'Salary',
-    'Offical Trip',
-    'Upcoming Event',
-    'Project Extension',
-    'Insurance',
-    'Employee Perks',
-    'Switching Shifts',
-    'Hiring',
-    'Resignation',
-    'Leave Approval',
-    'Tranfer Application',
-    'Salary',
-    'Offical Trip',
-    'Upcoming Event',
-    'Project Extension',
-    'Insurance',
-    'Employee Perks',
-    'Switching Shifts',
-    'Hiring',
-    'Resignation',
-    'Leave Approval',
-    'Tranfer Application',
-    'Salary',
-    'Offical Trip',
-    'Upcoming Event',
-    'Project Extension',
-    'Insurance',
-    'Employee Perks',
-    'Switching Shifts',
-    'Hiring',
-    'Resignation',
-    'Resignation',
-    'Leave Approval',
-    'Tranfer Application',
-    'Salary',
-    'Offical Trip',
-    'Upcoming Event',
-    'Project Extension',
-    'Insurance',
-    'Employee Perks',
-    'Switching Shifts',
-    'Hiring',
-    'Resignation',
-    'Resignation',
-    'Leave Approval',
-    'Tranfer Application',
-    'Salary',
-    'Offical Trip',
-    'Upcoming Event',
-    'Project Extension',
-    'Insurance',
-    'Employee Perks',
-    'Switching Shifts',
-    'Hiring',
-    'Resignation'
-  ];
+  List<String> subject = [];
+  // List<String> subject = [
+  //   'Leave Approval',
+  //   'Tranfer Application',
+  //   'Salary',
+  //   'Offical Trip',
+  //   'Upcoming Event',
+  //   'Project Extension',
+  //   'Insurance',
+  //   'Employee Perks',
+  //   'Switching Shifts',
+  //   'Hiring',
+  //   'Resignation',
+  //   'Leave Approval',
+  //   'Tranfer Application',
+  //   'Salary',
+  //   'Offical Trip',
+  //   'Upcoming Event',
+  //   'Project Extension',
+  //   'Insurance',
+  //   'Employee Perks',
+  //   'Switching Shifts',
+  //   'Hiring',
+  //   'Resignation',
+  //   'Leave Approval',
+  //   'Tranfer Application',
+  //   'Salary',
+  //   'Offical Trip',
+  //   'Upcoming Event',
+  //   'Project Extension',
+  //   'Insurance',
+  //   'Employee Perks',
+  //   'Switching Shifts',
+  //   'Hiring',
+  //   'Resignation',
+  //   'Leave Approval',
+  //   'Tranfer Application',
+  //   'Salary',
+  //   'Offical Trip',
+  //   'Upcoming Event',
+  //   'Project Extension',
+  //   'Insurance',
+  //   'Employee Perks',
+  //   'Switching Shifts',
+  //   'Hiring',
+  //   'Resignation',
+  //   'Leave Approval',
+  //   'Tranfer Application',
+  //   'Salary',
+  //   'Offical Trip',
+  //   'Upcoming Event',
+  //   'Project Extension',
+  //   'Insurance',
+  //   'Employee Perks',
+  //   'Switching Shifts',
+  //   'Hiring',
+  //   'Resignation',
+  //   'Resignation',
+  //   'Leave Approval',
+  //   'Tranfer Application',
+  //   'Salary',
+  //   'Offical Trip',
+  //   'Upcoming Event',
+  //   'Project Extension',
+  //   'Insurance',
+  //   'Employee Perks',
+  //   'Switching Shifts',
+  //   'Hiring',
+  //   'Resignation',
+  //   'Resignation',
+  //   'Leave Approval',
+  //   'Tranfer Application',
+  //   'Salary',
+  //   'Offical Trip',
+  //   'Upcoming Event',
+  //   'Project Extension',
+  //   'Insurance',
+  //   'Employee Perks',
+  //   'Switching Shifts',
+  //   'Hiring',
+  //   'Resignation'
+  // ];
+  List<DeployedForm?>? DeployedForms = [];
+  List<DeployedForm?>? CompletedForms = [];
+  List<String> deployedForms_string = [];
+  final storage = new SecureStorage(FlutterSecureStorage());
+  UserCredentials? currentuser;
+  late JsonDynamicForm jsonDynamicForm;
+  @override
+  void initState() {
+    DoStuff();
+
+    super.initState();
+  }
+
+  void DoStuff() async {
+    await CurrentUser();
+    await GetDeployedForms();
+    await Completedcheck();
+  }
+
+  Future CurrentUser() async {
+    String? usercreds = await storage.read(key: 'currentUser');
+
+    currentuser = UserCredentials.fromJson(jsonDecode(usercreds ?? ""));
+  }
+
+  Future GetDeployedForms() async {
+    DeployedForms = [];
+    //Populate form builder texts list
+    String? jsonString = await storage.read(key: 'deployedForms');
+    setState(() {
+      deployedForms_string =
+          (jsonDecode(jsonString ?? "") as List<dynamic>).cast<String>();
+    });
+
+    for (String s in deployedForms_string) {
+      Map<String, dynamic> data = jsonDecode(s);
+
+      DeployedForms!.add(DeployedForm.fromJson(data));
+    }
+  }
+
+  Completedcheck() {
+    for (int i = 0; i < DeployedForms!.length; i++) {
+      // print('${deployedForms[i].formDetails!.processSteps![i].stepPerformers}');
+      for (int j = 0;
+          j < DeployedForms![i]!.formDetails!.processSteps!.length;
+          j++) {
+        if (DeployedForms![i]!
+                .formDetails!
+                .processSteps![j]
+                .stepPerformers!
+                .contains(currentuser!.userName) &&
+            DeployedForms![i]!.formStatus == true) {
+          CompletedForms!.add(DeployedForms![i]);
+          subject[i] = CompletedForms![i]!.formDetails!.formJSON ?? "";
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +209,7 @@ class _HomeState extends State<approval_m> {
             ),
             Expanded(
               child: GridView.builder(
-                  itemCount: 50,
+                  itemCount: CompletedForms!.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4),
                   itemBuilder: ((context, index) =>
