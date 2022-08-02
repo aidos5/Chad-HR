@@ -5,7 +5,7 @@ import 'approval_main.dart';
 import 'main.dart';
 
 class approval extends StatefulWidget {
-  final int num;
+  final int? num;
   final String sub;
   approval({required this.num, required this.sub}) {}
 
@@ -38,7 +38,7 @@ class _approvalState extends State<approval> {
                         color: Color.fromARGB(255, 55, 64, 69)),
                   ),
                   Text(
-                    'Employee_${widget.num + 1}',
+                    'Employee_${widget.num! + 1}',
                     style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w600,
@@ -71,7 +71,7 @@ class _approvalState extends State<approval> {
                                                       255, 55, 64, 69)),
                                             ),
                                             Text(
-                                              'Employee_${widget.num + 1}',
+                                              'Employee_${widget.num! + 1}',
                                               style: TextStyle(
                                                   fontSize: 28.0,
                                                   fontWeight: FontWeight.w600,
