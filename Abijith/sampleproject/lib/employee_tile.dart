@@ -68,7 +68,15 @@ class EmployeeTiles extends StatelessWidget {
                     child: MaterialButton(
                       color: Colors.red,
                       onPressed: () {
+<<<<<<< Updated upstream
                         _launchURL(urls[itemNo]);
+=======
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Container();
+                            });
+>>>>>>> Stashed changes
                       },
                       child: const Text(
                         'Redeem',
